@@ -6,39 +6,43 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/06 17:24:32 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/10 20:12:50 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_hook(int key, t_mlx *mlx)
+int	key_press(int key, t_mlx *mlx)
 {
 	if (key == ESC)
 		exit(1);
 	else if (key == W_KEY)
 	{
-		mlx->player->y -= 5;
+		mlx->player->walk_direction = 1;
+		update_movment(mlx);
 	}
 	else if (key == S_KEY)
 	{
-		mlx->player->y += 5;
+		mlx->player->walk_direction = -1;
+		update_movment(mlx);
 	}
 	else if (key == D_KEY)
 	{
-		mlx->player->x += 5;
+		// should move to the right of the plyer looking
 	}
 	else if (key == A_KEY)
 	{
-		mlx->player->x -= 5;
+		// should move to the left of the plyer looking
 	}
 	else if (key == RIGHT_ARROW)
 	{
-		mlx->player->rotation_angle -= 0.1;
+		mlx->player->turn_direction = 1;
+		mlx->player->rotation_angle += mlx->player->turn_direction * mlx->player->rotation_speed;
 	}
 	else if (key == LEFT_ARROW)
 	{
-		mlx->player->rotation_angle += 0.1;
+		mlx->player->turn_direction = -1;
+		mlx->player->rotation_angle += mlx->player->turn_direction * mlx->player->rotation_speed;
 	}
 	draw_map(mlx);
 	draw_player(mlx);
@@ -46,8 +50,52 @@ int	key_hook(int key, t_mlx *mlx)
 	return (0);
 }
 
+int	key_relase(int key, t_mlx *mlx)
+{
+	if (key == W_KEY)
+	{
+		mlx->player->walk_direction = 0;
+	}
+	else if (key == S_KEY)
+	{
+		mlx->player->walk_direction = 0;
+	}
+	else if (key == D_KEY)
+	{
+		mlx->player->walk_direction = 0;
+	}
+	else if (key == A_KEY)
+	{
+		mlx->player->walk_direction = 0;
+	}
+	else if (key == RIGHT_ARROW)
+	{
+		mlx->player->turn_direction = 0;
+	}
+	else if (key == LEFT_ARROW)
+	{
+		mlx->player->turn_direction = 0;
+	}
+	// draw_map(mlx);
+	// draw_player(mlx);
+	// mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
+	return (0);
+}
 int	destroy_win(void)
 {
 	exit(1);
 	return (0);
+}
+
+void update_movment(t_mlx *mlx)
+{
+	int move_step = mlx->player->walk_direction * mlx->player->walk_speed;
+	double x = mlx->player->x + cos(mlx->player->rotation_angle) * move_step;
+	double y = mlx->player->y  +sin(mlx->player->rotation_angle) * move_step;
+
+	if (!is_wall(x, y, mlx))
+	{
+		mlx->player->x = x;
+		mlx->player->y = y;
+	}
 }

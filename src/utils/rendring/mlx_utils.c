@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:28:55 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/06 17:22:49 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/10 12:07:30 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,4 @@ void	draw_player(t_mlx *mlx)
 		}
 		i++;
 	}
-	// draw a line in the direction of the player
 }

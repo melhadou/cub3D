@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/06 17:24:03 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/10 20:11:41 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,15 @@ void	draw_player(t_mlx *mlx);
 
 
 /* ****************** Events Util_Functions ****************** */
-int	key_hook(int key, t_mlx *mlx);
+int	key_press(int key, t_mlx *mlx);
+int	key_relase(int key, t_mlx *mlx);
 int	destroy_win(void);
+void update_movment(t_mlx *mlx);
 
 /* ****************** DDA Util_Functions ****************** */
 void	dda(t_mlx mlx, t_player start, t_player end);
+
+/* ****************** Helpers Util_Functions ****************** */
+int is_wall(double x, double y, t_mlx *mlx);
 
 #endif

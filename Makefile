@@ -31,7 +31,7 @@ SRC = src/
 SRC_FILES= main.c
 
 UTILS = $(SRC)utils/
-UTILS_FILES= math_utils.c
+UTILS_FILES= math_utils.c helpers.c
 
 REDNRING = $(UTILS)rendring/
 REDNRING_FILES= mlx_utils.c events.c dda.c

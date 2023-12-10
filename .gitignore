@@ -9,6 +9,7 @@ Makefile.gen
 *.json
 cub3d
 .cache
+*.pdf
 
 ## Other
 .DS_STORE
