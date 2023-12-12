@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/10 20:12:50 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:22:41 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	key_press(int key, t_mlx *mlx)
 		mlx->player->turn_direction = -1;
 		mlx->player->rotation_angle += mlx->player->turn_direction * mlx->player->rotation_speed;
 	}
-	draw_map(mlx);
-	draw_player(mlx);
+  draw_map(mlx);
+	cast_rays(mlx);
+	render_rays(mlx);
+  draw_player(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	return (0);
 }
@@ -53,32 +55,17 @@ int	key_press(int key, t_mlx *mlx)
 int	key_relase(int key, t_mlx *mlx)
 {
 	if (key == W_KEY)
-	{
 		mlx->player->walk_direction = 0;
-	}
 	else if (key == S_KEY)
-	{
 		mlx->player->walk_direction = 0;
-	}
 	else if (key == D_KEY)
-	{
 		mlx->player->walk_direction = 0;
-	}
 	else if (key == A_KEY)
-	{
 		mlx->player->walk_direction = 0;
-	}
 	else if (key == RIGHT_ARROW)
-	{
 		mlx->player->turn_direction = 0;
-	}
 	else if (key == LEFT_ARROW)
-	{
 		mlx->player->turn_direction = 0;
-	}
-	// draw_map(mlx);
-	// draw_player(mlx);
-	// mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	return (0);
 }
 int	destroy_win(void)

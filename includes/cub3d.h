@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/10 20:11:41 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:52:49 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #define TILE_SIZE 64
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 640
+#define NB_RAYS WINDOW_WIDTH
 
 #define SPEED 5
 
@@ -53,6 +54,11 @@ enum {
 };
 #endif
 
+typedef struct t_ray
+{
+	double ray_angle;
+}	t_ray;
+
 /* ****************** DDA struct ****************** */
 typedef struct t_dda
 {
@@ -76,6 +82,7 @@ typedef struct t_player
 	double	rotation_angle;
 	double	rotation_speed;
 	double	walk_speed;
+	double	fov_angle;
 	double	color;
 }	t_player;
 
@@ -97,6 +104,7 @@ typedef struct t_mlx
 	t_player *player;
 	char **map;
 	int cube_size;
+	t_ray *rays;
 	t_data *img;
 }				t_mlx;
 
@@ -121,5 +129,8 @@ void	dda(t_mlx mlx, t_player start, t_player end);
 
 /* ****************** Helpers Util_Functions ****************** */
 int is_wall(double x, double y, t_mlx *mlx);
+void cast_rays(t_mlx *mlx);
+void render_rays(t_mlx *mlx);
+double distanceBetweenPoints(t_player p1, t_player p2);
 
 #endif

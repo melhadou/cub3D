@@ -6,12 +6,11 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/10 20:14:05 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:25:16 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 void init_player(t_player *player)
 {
@@ -21,18 +20,21 @@ void init_player(t_player *player)
 	player->walk_direction = 0; // -1 for back, +1 for front
 	player->rotation_angle = M_PI / 2;
 	player->walk_speed = 5;
-	player->rotation_speed = 5 * (M_PI / 180);
+	player->color = 0xff0;
+	player->rotation_speed = deg2rad(5);
+	player->fov_angle = deg2rad(60);
 }
 
 int main(int argc, char **argv) {
   t_mlx mlx;
 
   t_player player;
+	t_ray rays[NB_RAYS];
 
   char map[10][10] = {{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
                       {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
                       {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-                      {'1', '0', '1', '1', '1', '1', '0', '0', '1', '1'},
+                      {'1', '0', '0', '1', '1', '1', '0', '0', '1', '1'},
                       {'1', '0', '1', '0', '0', '1', '0', '0', '0', '1'},
                       {'1', '0', '1', '0', '0', '0', '0', '1', '1', '1'},
                       {'1', '0', '1', '0', '0', '0', '0', '0', '0', '1'},
@@ -64,8 +66,11 @@ int main(int argc, char **argv) {
   mlx.cube_size = 64;
 	init_player(&player);
   mlx.player = &player;
+	mlx.rays = rays;
 
   draw_map(&mlx);
+	cast_rays(&mlx);
+	render_rays(&mlx);
   draw_player(&mlx);
 
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
