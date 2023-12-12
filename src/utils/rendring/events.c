@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/11 17:22:41 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/12 18:16:49 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ int	key_press(int key, t_mlx *mlx)
 		mlx->player->turn_direction = -1;
 		mlx->player->rotation_angle += mlx->player->turn_direction * mlx->player->rotation_speed;
 	}
-  draw_map(mlx);
+  // draw_map(mlx);
+	clear_mlx_img(mlx);
 	cast_rays(mlx);
 	render_rays(mlx);
   draw_player(mlx);
+	render_3d_walls(mlx);
+
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	return (0);
 }

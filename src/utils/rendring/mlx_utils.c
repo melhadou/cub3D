@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:28:55 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/10 12:07:30 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:30:32 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	draw_player(t_mlx *mlx)
 		while(j < y + 3)
 		{
 			// mlx_pixel_put(mlx->mlx, mlx->win, i, j, 0x0000FF);
-			dda(*mlx, (t_player){i,j}, (t_player){i + (20 * cos(mlx->player->rotation_angle)), j + (20 * sin(mlx->player->rotation_angle))});
 			my_mlx_pixel_put(mlx->img, i, j, 0x0000FF);
 			j++;
 		}

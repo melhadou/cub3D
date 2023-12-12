@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/11 17:25:16 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/12 18:12:36 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void init_player(t_player *player)
 {
-  player->x = (float) WINDOW_WIDTH / 2;
-  player->y = (float) WINDOW_HEIGHT / 2;
+  player->x = 300;
+  player->y = 100;
 	player->turn_direction = 0; // -1 for left, +1 for right
 	player->walk_direction = 0; // -1 for back, +1 for front
 	player->rotation_angle = M_PI / 2;
@@ -63,15 +63,16 @@ int main(int argc, char **argv) {
   mlx.img->img = mlx_new_image(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
   mlx.img->addr = mlx_get_data_addr(mlx.img->img, &(mlx.img->bits_per_pixel),
                                     &mlx.img->line_lenght, &mlx.img->endian);
-  mlx.cube_size = 64;
+  mlx.cube_size = TILE_SIZE;
 	init_player(&player);
   mlx.player = &player;
 	mlx.rays = rays;
 
-  draw_map(&mlx);
+  // draw_map(&mlx);
 	cast_rays(&mlx);
 	render_rays(&mlx);
   draw_player(&mlx);
+	render_3d_walls(&mlx);
 
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
 	mlx_hook(mlx.win, 2, MLX_MASK, &key_press, &mlx);
