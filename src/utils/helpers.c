@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/14 15:49:12 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:25:43 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,17 @@ void render_rays(t_mlx *mlx)
 		pt2.y = mlx->player->y + sin(rays[i].ray_angle);
 		while(!is_wall(pt2.x, pt2.y, mlx))
 		{
+			pt2.x += cos(rays[i].ray_angle) * 5;
+			pt2.y += sin(rays[i].ray_angle) * 5;
+		}
+		pt2.x -= cos(rays[i].ray_angle) * 5;
+		pt2.y -= sin(rays[i].ray_angle) * 5;
+		while(!is_wall(pt2.x, pt2.y, mlx))
+		{
 			pt2.x += cos(rays[i].ray_angle);
 			pt2.y += sin(rays[i].ray_angle);
-		}
-		// pt2.x -= cos(rays[i].ray_angle) * 5;
-		// pt2.y -= sin(rays[i].ray_angle) * 5;
-		// while(!is_wall(pt2.x, pt2.y, mlx))
-		// {
-		// 	pt2.x += cos(rays[i].ray_angle);
-		// 	pt2.y += sin(rays[i].ray_angle);
-		// }	
-		rays[i].distance = distanceBetweenPoints(*mlx->player, pt2);
-		// dda(*mlx, *mlx->player, pt2);
+		}	
+		rays[i].distance = distanceBetweenPoints(*mlx->player, pt2) * cos(rays[i].ray_angle - mlx->player->rotation_angle);
 		i++;
 	}
 }
@@ -115,6 +114,7 @@ void render_3d_walls(t_mlx *mlx)
 	i = 0;
 	t_player p1;
 	t_player p2;
+	p2.color = 0xe00fa0;
 	while(i < NB_RAYS)
 	{
 		ray_distance = mlx->rays[i].distance;
@@ -125,6 +125,28 @@ void render_3d_walls(t_mlx *mlx)
 		// 	(t_player){10, wall_strip_height}, mlx, 0x00ff00);
 		//
 		//
+
+		/* ------------------ trying color sepration ------------------ */
+
+		// if (rad2deg(mlx->rays[i].ray_angle) >= 0 && rad2deg(mlx->rays[i].ray_angle) <= 90)
+		// {
+		// 	p2.color = 0x00ff00;
+		// }
+		// else if (rad2deg(mlx->rays[i].ray_angle) > 90 && rad2deg(mlx->rays[i].ray_angle) <= 180)
+		// {
+		// 	printf("2 - ray_angle: %f\n", rad2deg(mlx->rays[i].ray_angle));
+		// 	p2.color = 0xff00ff;
+		// }
+		// else if (rad2deg(mlx->rays[i].ray_angle) > 180 && rad2deg(mlx->rays[i].ray_angle) <= 270)
+		// {
+		// 	printf("2 - ray_angle: %f\n", rad2deg(mlx->rays[i].ray_angle));
+		// 	p2.color = 0xe00fa0;
+		// }
+		// else if (rad2deg(mlx->rays[i].ray_angle) > 270 && rad2deg(mlx->rays[i].ray_angle) <= 360)
+		// {
+		// 	printf("2 - ray_angle: %f\n", rad2deg(mlx->rays[i].ray_angle));
+		// 	p2.color = 0xa0a000;
+		// }
 
 		p1.x = i;
 		p1.y = ((float)WINDOW_HEIGHT / 2) - (wall_strip_height / 2);

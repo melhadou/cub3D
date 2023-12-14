@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/14 15:57:55 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:00:30 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	key_press(int key, t_mlx *mlx)
 	// need to check if the
 	cast_rays(mlx);
 	render_rays(mlx);
-  draw_player(mlx);
+  // draw_player(mlx);
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
   mlx->img->img = mlx_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
   mlx->img->addr = mlx_get_data_addr(mlx->img->img, &(mlx->img->bits_per_pixel),

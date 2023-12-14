@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/14 15:58:22 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:20:35 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
   // draw_map(&mlx);
 	cast_rays(&mlx);
 	render_rays(&mlx);
-  draw_player(&mlx);
+  // draw_player(&mlx);
 	render_3d_walls(&mlx);
 
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
