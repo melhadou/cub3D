@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/12 18:22:48 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:50:00 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ typedef struct t_ray
 /* ****************** DDA struct ****************** */
 typedef struct t_dda
 {
-	float	dx;
-	float	dy;
-	float	steps;
-	float	x_inc;
-	float	y_inc;
-	float	x;
-	float	y;
-	int		color;
+	double	dx;
+	double	dy;
+	double	steps;
+	double	x_inc;
+	double	y_inc;
+	double	x;
+	double	y;
+	double		color;
 }	t_dda;
 
 typedef struct t_player

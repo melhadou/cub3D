@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/12 18:12:36 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:58:22 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void init_player(t_player *player)
 	player->turn_direction = 0; // -1 for left, +1 for right
 	player->walk_direction = 0; // -1 for back, +1 for front
 	player->rotation_angle = M_PI / 2;
-	player->walk_speed = 5;
+	player->walk_speed = 10;
 	player->color = 0xff0;
 	player->rotation_speed = deg2rad(5);
 	player->fov_angle = deg2rad(60);
@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
 	mlx_hook(mlx.win, 2, MLX_MASK, &key_press, &mlx);
 	mlx_hook(mlx.win, 3, MLX_MASK, &key_relase, &mlx);
   mlx_hook(mlx.win, 17, MLX_MASK, &destroy_win, &mlx);
-
-  mlx_loop(mlx.mlx);
+  
+	mlx_loop(mlx.mlx);
   return (EXIT_SUCCESS);
 }
