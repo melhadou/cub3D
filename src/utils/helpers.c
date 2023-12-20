@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 19:01:25 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:02:04 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int is_wall(double x, double y, t_mlx *mlx){
 		return (1);
 	int x1 = floor(x / TILE_SIZE);
 	int y1 = floor(y / TILE_SIZE);
+	// have segfault when the player is in the last line of the map
 	if (y1 >= mlx->map_width)
 		return 1;
 	if (mlx->map[y1][x1] == '1')
