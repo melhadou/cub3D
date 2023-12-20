@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/14 15:50:00 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:16:14 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include <stdlib.h>
 
 #define TILE_SIZE 64
-#define WINDOW_WIDTH 1080
-#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 640
 #define NB_RAYS WINDOW_WIDTH
 
 #define SPEED 5
@@ -58,6 +58,13 @@ typedef struct t_ray
 {
 	double ray_angle;
 	double distance;
+	double wall_hit_x;
+	double wall_hit_y;
+	double column_id;
+	double rayfacing_up;
+	double rayfacing_down;
+	double rayfacing_left;
+	double rayfacing_right;
 }	t_ray;
 
 /* ****************** DDA struct ****************** */
@@ -136,5 +143,8 @@ double distanceBetweenPoints(t_player p1, t_player p2);
 void draw_rectangle(t_player p1, t_player p2, t_mlx *mlx, int color);
 void render_3d_walls(t_mlx *mlx);
 void clear_mlx_img(t_mlx *mlx);
+
+/* ****************** Ray Casting Functions ****************** */
+void cast_ray_v2(t_mlx *mlx, int i);
 
 #endif

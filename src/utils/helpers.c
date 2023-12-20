@@ -6,14 +6,14 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/14 16:25:43 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:34:39 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
-int is_wall(double x, double y, t_mlx *mlx){
+/* @: check if the player is in a wall or not.*/
+int is_wall(double x, double y, t_mlx *mlx){ 
 	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
 		return (1);
 	double x1 = floor(x / TILE_SIZE);
@@ -22,8 +22,6 @@ int is_wall(double x, double y, t_mlx *mlx){
 		return (1);
 	return (0);
 }
-
-
 
 double angleNormalizeInDegree(double angle)
 {
@@ -36,16 +34,29 @@ double angleNormalizeInDegree(double angle)
 
 void cast_rays(t_mlx *mlx)
 {
+	int column_id;
 	int i;
 
 	double ray_angle = mlx->player->rotation_angle - (mlx->player->fov_angle / 2);
 	i = 0;
 	while(i < NB_RAYS)
 	{
+
 		mlx->rays[i].ray_angle = ray_angle;
+		mlx->rays[i].column_id = column_id;
+		
+		// checking direction of the ray
+		mlx->rays[i].rayfacing_down = ray_angle > 0 && ray_angle < deg2rad(180);
+		mlx->rays[i].rayfacing_up = !mlx->rays[i].rayfacing_down; // checking for the opposite
+		mlx->rays[i].rayfacing_right = ray_angle < deg2rad(90) || ray_angle > deg2rad(270);
+		mlx->rays[i].rayfacing_left = !mlx->rays[i].rayfacing_right;
+
+		// cast(col_id, ray_angle);
+		cast_ray_v2(mlx, i);
 		ray_angle += mlx->player->fov_angle / NB_RAYS;
 		ray_angle = angleNormalizeInDegree(ray_angle);
 		i++;
+		column_id++;
 	}
 }
 

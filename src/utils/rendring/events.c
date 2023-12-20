@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/14 16:00:30 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:23:41 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,17 @@ int	key_press(int key, t_mlx *mlx)
 		mlx->player->rotation_angle += mlx->player->turn_direction * mlx->player->rotation_speed;
 	}
   // draw_map(mlx);
-	// clear_mlx_img(mlx);
 	// need to check if the
-	cast_rays(mlx);
-	render_rays(mlx);
   // draw_player(mlx);
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
   mlx->img->img = mlx_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
   mlx->img->addr = mlx_get_data_addr(mlx->img->img, &(mlx->img->bits_per_pixel),
                                     &mlx->img->line_lenght, &mlx->img->endian);
-	render_3d_walls(mlx);
+  draw_map(mlx);
+  draw_player(mlx);
+	cast_rays(mlx);
+	render_rays(mlx);
+	// render_3d_walls(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	return (0);
 }

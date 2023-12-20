@@ -34,7 +34,7 @@ UTILS = $(SRC)utils/
 UTILS_FILES= math_utils.c helpers.c
 
 REDNRING = $(UTILS)rendring/
-REDNRING_FILES= mlx_utils.c events.c dda.c
+REDNRING_FILES= mlx_utils.c events.c dda.c  raycasting.c
 
 FILES = $(addprefix $(SRC), $(SRC_FILES))
 FILES += $(addprefix $(UTILS), $(UTILS_FILES))
