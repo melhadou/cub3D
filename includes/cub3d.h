@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 18:53:25 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:50:23 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TILE_SIZE 64
-#define WINDOW_WIDTH 1080
+#define TILE_SIZE 96
+#define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 960
 #define NB_RAYS WINDOW_WIDTH
 #define MAX_NB 100000000

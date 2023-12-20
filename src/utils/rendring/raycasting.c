@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:56:37 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 18:57:01 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:53:30 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 
 	ray = malloc(sizeof(t_ray));
 	// find x-cord of the closest vertical grid intersection
-	xintercept = floor(mlx->player->x / (double)TILE_SIZE) * TILE_SIZE;
+	xintercept = floor(mlx->player->x / (double)TILE_SIZE * TILE_SIZE);
 	if (mlx->rays[i].rayfacing_right)
 		xintercept += TILE_SIZE;
 	// find y-cond of the closest vertical grid intersection
@@ -105,15 +105,15 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	vert_x = xintercept;
 	vert_y = yintercept;
 	// increment xstep and ystep until we find a wall
-	if (mlx->rays[i].rayfacing_left)
-		vert_x--;
 	while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
 	{
+		if (mlx->rays[i].rayfacing_left)
+			vert_x--;
 		if (is_wall(vert_x, vert_y, mlx))
 		{
-			// calculate the distance
 			tmp.x = vert_x;
 			tmp.y = vert_y;
+			// calculate the distance
 			mlx->rays[i].found_vert_wall_hit = 1;
 			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
 			break;
@@ -126,7 +126,6 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 		ray->distance = distanceBetweenPoints(*mlx->player, tmp) * cos(mlx->rays[i].ray_angle - mlx->player->rotation_angle);
 	else
 		ray->distance = MAX_NB;
-	
 	// record x and y
 	ray->hit_x = tmp.x;
 	ray->hit_y = tmp.y;

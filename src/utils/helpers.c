@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 19:02:04 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:52:31 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ int is_wall(double x, double y, t_mlx *mlx){
 		return (1);
 	int x1 = floor(x / TILE_SIZE);
 	int y1 = floor(y / TILE_SIZE);
-	// have segfault when the player is in the last line of the map
-	if (y1 >= mlx->map_width)
-		return 1;
 	if (mlx->map[y1][x1] == '1')
 			return (1);
 	return (0);
@@ -53,8 +50,8 @@ void cast_rays(t_mlx *mlx)
 		mlx->rays[i].rayfacing_right = ray_angle < deg2rad(90) || ray_angle > deg2rad(270);
 		mlx->rays[i].rayfacing_left = !mlx->rays[i].rayfacing_right;
 
-		horz_tmp = horizontal_intersection(mlx, i);
 		verti_tmp = vertical_intersection(mlx, i);
+		horz_tmp = horizontal_intersection(mlx, i);
 	
 		// record x and y of ray
 		mlx->rays[i].distance = verti_tmp->distance;
@@ -67,8 +64,8 @@ void cast_rays(t_mlx *mlx)
 			// mlx->rays[i].hit_x = verti_tmp->hit_x;
 		}
 		// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){mlx->rays[i].hit_x, mlx->rays[i].hit_y});
-		// free(verti_tmp);
-		// free(horz_tmp);
+		free(verti_tmp);
+		free(horz_tmp);
 		ray_angle += mlx->player->fov_angle / NB_RAYS;
 		ray_angle = angleNormalizeInDegree(ray_angle);
 		i++;
@@ -124,24 +121,20 @@ void render_3d_walls(t_mlx *mlx)
 		//
 
 		/* ------------------ trying color sepration ------------------ */
-
-		// if (rad2deg(mlx->rays[i].ray_angle) >= 0 && rad2deg(mlx->rays[i].ray_angle) <= 90)
+		// if (mlx->rays[i].rayfacing_up)
 		// {
 		// 	p2.color = 0x00ff00;
 		// }
-		// else if (rad2deg(mlx->rays[i].ray_angle) > 90 && rad2deg(mlx->rays[i].ray_angle) <= 180)
+		// else if (mlx->rays[i].rayfacing_down)
 		// {
-		// 	printf("2 - ray_angle: %f\n", rad2deg(mlx->rays[i].ray_angle));
 		// 	p2.color = 0xff00ff;
 		// }
-		// else if (rad2deg(mlx->rays[i].ray_angle) > 180 && rad2deg(mlx->rays[i].ray_angle) <= 270)
+		// else if (mlx->rays[i].rayfacing_down)
 		// {
-		// 	printf("2 - ray_angle: %f\n", rad2deg(mlx->rays[i].ray_angle));
 		// 	p2.color = 0xe00fa0;
 		// }
-		// else if (rad2deg(mlx->rays[i].ray_angle) > 270 && rad2deg(mlx->rays[i].ray_angle) <= 360)
+		// else if (mlx->rays[i].rayfacing_down)
 		// {
-		// 	printf("2 - ray_angle: %f\n", rad2deg(mlx->rays[i].ray_angle));
 		// 	p2.color = 0xa0a000;
 		// }
 
