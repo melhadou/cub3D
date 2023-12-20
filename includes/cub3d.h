@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 15:16:14 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:53:25 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 #include <stdlib.h>
 
 #define TILE_SIZE 64
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 640
+#define WINDOW_WIDTH 1080
+#define WINDOW_HEIGHT 960
 #define NB_RAYS WINDOW_WIDTH
+#define MAX_NB 100000000
 
 #define SPEED 5
 
@@ -56,15 +57,17 @@ enum {
 
 typedef struct t_ray
 {
+	double hit_x;
+	double hit_y;
 	double ray_angle;
 	double distance;
-	double wall_hit_x;
-	double wall_hit_y;
 	double column_id;
-	double rayfacing_up;
-	double rayfacing_down;
-	double rayfacing_left;
-	double rayfacing_right;
+	int rayfacing_up;
+	int rayfacing_down;
+	int rayfacing_left;
+	int rayfacing_right;
+	int	found_horz_wall_hit;
+	int	found_vert_wall_hit;
 }	t_ray;
 
 /* ****************** DDA struct ****************** */
@@ -111,6 +114,8 @@ typedef struct t_mlx
 	void *win;
 	t_player *player;
 	char **map;
+	int map_width;
+	int map_height;
 	int cube_size;
 	t_ray *rays;
 	t_data *img;
@@ -138,13 +143,13 @@ void	dda(t_mlx mlx, t_player start, t_player end);
 /* ****************** Helpers Util_Functions ****************** */
 int is_wall(double x, double y, t_mlx *mlx);
 void cast_rays(t_mlx *mlx);
-void render_rays(t_mlx *mlx);
 double distanceBetweenPoints(t_player p1, t_player p2);
 void draw_rectangle(t_player p1, t_player p2, t_mlx *mlx, int color);
 void render_3d_walls(t_mlx *mlx);
 void clear_mlx_img(t_mlx *mlx);
 
 /* ****************** Ray Casting Functions ****************** */
-void cast_ray_v2(t_mlx *mlx, int i);
+t_ray *vertical_intersection(t_mlx *mlx, int i);
+t_ray *horizontal_intersection(t_mlx *mlx, int i);
 
 #endif

@@ -6,41 +6,24 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:56:37 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 15:34:27 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:57:01 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void horizontal_intersection(double ray_angle)
+t_ray *horizontal_intersection(t_mlx *mlx, int i)
 {
-	double ystep;
-	double xstep;
-
-	ystep = TILE_SIZE;
-	xstep = tan(ray_angle) / TILE_SIZE;
-}
-
-void vertical_intersection(double ray_angle)
-{
-	double xstep;
-	double ystep;
-
-	xstep = TILE_SIZE;
-	ystep = tan(ray_angle) * TILE_SIZE;
-}
-
-void cast_ray_v2(t_mlx *mlx, int i)
-{
-	int j;
 	double xstep;
 	double ystep;
 	double xintercept;
 	double yintercept;
-	double xtocheck;
-	double ytocheck;
+	double horiz_x;
+	double horiz_y;
 	t_player tmp;
+	t_ray *ray;
 
+	ray = malloc(sizeof(t_ray));
 	// find y cord of the closest horizontal grid intersection
 	yintercept = floor(mlx->player->y / (double)TILE_SIZE) * TILE_SIZE;
 	if (mlx->rays[i].rayfacing_down)
@@ -58,25 +41,95 @@ void cast_ray_v2(t_mlx *mlx, int i)
 		xstep *= -1;
 
 	// used to find the cell containing the wall hit
-	xtocheck = xintercept;
-	ytocheck = yintercept;
-	if (mlx->rays[i].rayfacing_up)
-		ytocheck--;
+	horiz_x = xintercept;
+	horiz_y = yintercept;
 	// increment xstep and ystep until we find a wall
-	while(xtocheck >= 0 && xtocheck <= WINDOW_WIDTH && ytocheck >= 0 && ytocheck <= WINDOW_HEIGHT)
+	while(horiz_x >= 0 && horiz_x <= WINDOW_WIDTH && horiz_y >= 0 && horiz_y <= WINDOW_HEIGHT)
 	{
-		if (is_wall(xtocheck, ytocheck, mlx))
+		if (mlx->rays[i].rayfacing_up)
+			horiz_y--;
+		if (is_wall(horiz_x, horiz_y, mlx))
 		{
 			// calculate the distance
-			tmp.x = xtocheck;
-			tmp.y = ytocheck;
-			// mlx->rays[i].distance = distanceBetweenPoints(*mlx->player, tmp) * cos(mlx->rays[i].ray_angle - mlx->player->rotation_angle);
-			tmp.color = 0x00ff;
-			dda(*mlx, *mlx->player, tmp);
+			tmp.x = horiz_x;
+			tmp.y = horiz_y;
+			mlx->rays[i].found_horz_wall_hit = 1;
+			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
 			break;
 		}
-		xtocheck += xstep;
-		ytocheck += ystep;
+		horiz_x += xstep;
+		horiz_y += ystep;
 		// printf("xtocheck: %f, ytocheck: %f\n", xtocheck, ytocheck);
 	}
+	if (mlx->rays[i].found_horz_wall_hit)
+		ray->distance = distanceBetweenPoints(*mlx->player, tmp) * cos(mlx->rays[i].ray_angle - mlx->player->rotation_angle);
+	else
+		ray->distance = MAX_NB;
+	// record x and y
+	ray->hit_x = tmp.x;
+	ray->hit_y = tmp.y;
+
+	return (ray);
+}
+
+t_ray *vertical_intersection(t_mlx *mlx, int i)
+{
+	double xstep;
+	double ystep;
+	double xintercept;
+	double yintercept;
+	double vert_x;
+	double vert_y;
+	t_player tmp;
+	t_ray *ray;
+
+	ray = malloc(sizeof(t_ray));
+	// find x-cord of the closest vertical grid intersection
+	xintercept = floor(mlx->player->x / (double)TILE_SIZE) * TILE_SIZE;
+	if (mlx->rays[i].rayfacing_right)
+		xintercept += TILE_SIZE;
+	// find y-cond of the closest vertical grid intersection
+	yintercept = mlx->player->y + (xintercept - mlx->player->x) * tan(mlx->rays[i].ray_angle);
+
+	xstep = TILE_SIZE;
+	if (mlx->rays[i].rayfacing_left)
+		xstep *= -1;
+
+	ystep = TILE_SIZE * tan(mlx->rays[i].ray_angle);
+	if (mlx->rays[i].rayfacing_up && ystep > 0)
+		ystep *= -1;
+	else if (mlx->rays[i].rayfacing_down && ystep < 0)
+		ystep *= -1;
+
+	// used to find the cell containing the wall hit
+	vert_x = xintercept;
+	vert_y = yintercept;
+	// increment xstep and ystep until we find a wall
+	if (mlx->rays[i].rayfacing_left)
+		vert_x--;
+	while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
+	{
+		if (is_wall(vert_x, vert_y, mlx))
+		{
+			// calculate the distance
+			tmp.x = vert_x;
+			tmp.y = vert_y;
+			mlx->rays[i].found_vert_wall_hit = 1;
+			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
+			break;
+		}
+		vert_x += xstep;
+		vert_y += ystep;
+		// printf("x: %f, y: %f\n", vert_x, vert_y);
+	}
+	if (mlx->rays[i].found_vert_wall_hit)
+		ray->distance = distanceBetweenPoints(*mlx->player, tmp) * cos(mlx->rays[i].ray_angle - mlx->player->rotation_angle);
+	else
+		ray->distance = MAX_NB;
+	
+	// record x and y
+	ray->hit_x = tmp.x;
+	ray->hit_y = tmp.y;
+
+	return (ray);
 }

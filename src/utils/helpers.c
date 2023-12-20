@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 15:34:39 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:01:25 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 int is_wall(double x, double y, t_mlx *mlx){ 
 	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
 		return (1);
-	double x1 = floor(x / TILE_SIZE);
-	double y1 = floor(y / TILE_SIZE);
-	if (mlx->map[(int)y1][(int)x1] == '1')
-		return (1);
+	int x1 = floor(x / TILE_SIZE);
+	int y1 = floor(y / TILE_SIZE);
+	if (y1 >= mlx->map_width)
+		return 1;
+	if (mlx->map[y1][x1] == '1')
+			return (1);
 	return (0);
 }
 
@@ -34,16 +36,15 @@ double angleNormalizeInDegree(double angle)
 
 void cast_rays(t_mlx *mlx)
 {
-	int column_id;
 	int i;
+	t_ray *horz_tmp;
+	t_ray *verti_tmp;
 
 	double ray_angle = mlx->player->rotation_angle - (mlx->player->fov_angle / 2);
 	i = 0;
 	while(i < NB_RAYS)
 	{
-
 		mlx->rays[i].ray_angle = ray_angle;
-		mlx->rays[i].column_id = column_id;
 		
 		// checking direction of the ray
 		mlx->rays[i].rayfacing_down = ray_angle > 0 && ray_angle < deg2rad(180);
@@ -51,40 +52,24 @@ void cast_rays(t_mlx *mlx)
 		mlx->rays[i].rayfacing_right = ray_angle < deg2rad(90) || ray_angle > deg2rad(270);
 		mlx->rays[i].rayfacing_left = !mlx->rays[i].rayfacing_right;
 
-		// cast(col_id, ray_angle);
-		cast_ray_v2(mlx, i);
+		horz_tmp = horizontal_intersection(mlx, i);
+		verti_tmp = vertical_intersection(mlx, i);
+	
+		// record x and y of ray
+		mlx->rays[i].distance = verti_tmp->distance;
+		// mlx->rays[i].hit_y = horz_tmp->hit_y;
+		// mlx->rays[i].hit_x = horz_tmp->hit_x;
+		if (horz_tmp->distance < verti_tmp->distance)
+		{
+			mlx->rays[i].distance = horz_tmp->distance;
+			// mlx->rays[i].hit_y = horz_tmp->hit_y;
+			// mlx->rays[i].hit_x = verti_tmp->hit_x;
+		}
+		// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){mlx->rays[i].hit_x, mlx->rays[i].hit_y});
+		// free(verti_tmp);
+		// free(horz_tmp);
 		ray_angle += mlx->player->fov_angle / NB_RAYS;
 		ray_angle = angleNormalizeInDegree(ray_angle);
-		i++;
-		column_id++;
-	}
-}
-
-void render_rays(t_mlx *mlx)
-{
-	int i;
-	t_ray *rays = mlx->rays;
-	t_player pt2;
-
-	pt2.color = 0x00ff;
-	i = 0;
-	while(i < NB_RAYS)
-	{
-		pt2.x = mlx->player->x + cos(rays[i].ray_angle);
-		pt2.y = mlx->player->y + sin(rays[i].ray_angle);
-		while(!is_wall(pt2.x, pt2.y, mlx))
-		{
-			pt2.x += cos(rays[i].ray_angle) * 5;
-			pt2.y += sin(rays[i].ray_angle) * 5;
-		}
-		pt2.x -= cos(rays[i].ray_angle) * 5;
-		pt2.y -= sin(rays[i].ray_angle) * 5;
-		while(!is_wall(pt2.x, pt2.y, mlx))
-		{
-			pt2.x += cos(rays[i].ray_angle);
-			pt2.y += sin(rays[i].ray_angle);
-		}	
-		rays[i].distance = distanceBetweenPoints(*mlx->player, pt2) * cos(rays[i].ray_angle - mlx->player->rotation_angle);
 		i++;
 	}
 }
@@ -161,7 +146,7 @@ void render_3d_walls(t_mlx *mlx)
 
 		p1.x = i;
 		p1.y = ((float)WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
-
+		
 		p2.x = i;
 		p2.y = ((float)WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
 		dda(*mlx, p1, p2);
