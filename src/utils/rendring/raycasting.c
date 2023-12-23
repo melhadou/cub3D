@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:56:37 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 19:53:30 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/23 18:07:23 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 	t_player tmp;
 	t_ray *ray;
 
+	mlx->rays[i].found_horz_wall_hit = 0;
 	ray = malloc(sizeof(t_ray));
 	// find y cord of the closest horizontal grid intersection
 	yintercept = floor(mlx->player->y / (double)TILE_SIZE) * TILE_SIZE;
@@ -34,11 +35,16 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 	ystep = TILE_SIZE;
 	if (mlx->rays[i].rayfacing_up)
 		ystep *= -1;
+	else
+		ystep *= 1;
+
 	xstep = TILE_SIZE / tan(mlx->rays[i].ray_angle);
 	if (mlx->rays[i].rayfacing_left && xstep > 0)
 		xstep *= -1;
 	else if (mlx->rays[i].rayfacing_right && xstep < 0)
 		xstep *= -1;
+	else
+		xstep *= 1;
 
 	// used to find the cell containing the wall hit
 	horiz_x = xintercept;
@@ -54,6 +60,7 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 			tmp.x = horiz_x;
 			tmp.y = horiz_y;
 			mlx->rays[i].found_horz_wall_hit = 1;
+			// tmp.color = 0x00ff;
 			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
 			break;
 		}
@@ -83,11 +90,14 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	t_player tmp;
 	t_ray *ray;
 
+	mlx->rays[i].found_vert_wall_hit = 0;
 	ray = malloc(sizeof(t_ray));
 	// find x-cord of the closest vertical grid intersection
-	xintercept = floor(mlx->player->x / (double)TILE_SIZE * TILE_SIZE);
+
+	xintercept = floor(mlx->player->x / TILE_SIZE) * TILE_SIZE;
 	if (mlx->rays[i].rayfacing_right)
 		xintercept += TILE_SIZE;
+
 	// find y-cond of the closest vertical grid intersection
 	yintercept = mlx->player->y + (xintercept - mlx->player->x) * tan(mlx->rays[i].ray_angle);
 
@@ -98,24 +108,24 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	ystep = TILE_SIZE * tan(mlx->rays[i].ray_angle);
 	if (mlx->rays[i].rayfacing_up && ystep > 0)
 		ystep *= -1;
-	else if (mlx->rays[i].rayfacing_down && ystep < 0)
+	if (mlx->rays[i].rayfacing_down && ystep < 0)
 		ystep *= -1;
 
 	// used to find the cell containing the wall hit
 	vert_x = xintercept;
 	vert_y = yintercept;
 	// increment xstep and ystep until we find a wall
+	if (mlx->rays[i].rayfacing_left)
+		vert_x--;
 	while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
 	{
-		if (mlx->rays[i].rayfacing_left)
-			vert_x--;
 		if (is_wall(vert_x, vert_y, mlx))
 		{
 			tmp.x = vert_x;
 			tmp.y = vert_y;
 			// calculate the distance
+			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, tmp);
 			mlx->rays[i].found_vert_wall_hit = 1;
-			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
 			break;
 		}
 		vert_x += xstep;

@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/20 19:50:23 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/23 18:48:29 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 960
 #define NB_RAYS WINDOW_WIDTH
+// #define NB_RAYS 1
 #define MAX_NB 100000000
 
 #define SPEED 5
@@ -62,6 +63,7 @@ typedef struct t_ray
 	double ray_angle;
 	double distance;
 	double column_id;
+	double color;
 	int rayfacing_up;
 	int rayfacing_down;
 	int rayfacing_left;
@@ -130,17 +132,18 @@ void draw_map(t_mlx *mlx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_player(t_mlx *mlx);
 
-
 /* ****************** Events Util_Functions ****************** */
 int	key_press(int key, t_mlx *mlx);
 int	key_relase(int key, t_mlx *mlx);
 int	destroy_win(void);
 void update_movment(t_mlx *mlx);
+void update_movment_sides(t_mlx *mlx, int side);
 
 /* ****************** DDA Util_Functions ****************** */
 void	dda(t_mlx mlx, t_player start, t_player end);
 
 /* ****************** Helpers Util_Functions ****************** */
+double angle_normalize(double angle);
 int is_wall(double x, double y, t_mlx *mlx);
 void cast_rays(t_mlx *mlx);
 double distanceBetweenPoints(t_player p1, t_player p2);
