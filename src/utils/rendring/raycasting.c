@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:56:37 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/23 18:07:23 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/25 21:46:02 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 	// used to find the cell containing the wall hit
 	horiz_x = xintercept;
 	horiz_y = yintercept;
+	tmp.x = MAX_NB;
+	tmp.y = MAX_NB;
 	// increment xstep and ystep until we find a wall
+	if (mlx->rays[i].rayfacing_up)
+		horiz_y--;
 	while(horiz_x >= 0 && horiz_x <= WINDOW_WIDTH && horiz_y >= 0 && horiz_y <= WINDOW_HEIGHT)
 	{
-		if (mlx->rays[i].rayfacing_up)
-			horiz_y--;
-		if (is_wall(horiz_x, horiz_y, mlx))
+		int hit = is_wall(horiz_x, horiz_y, mlx);
+		if (hit == 1)
 		{
 			// calculate the distance
 			tmp.x = horiz_x;
@@ -64,12 +67,23 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
 			break;
 		}
+		if (hit == 2)
+		{
+			tmp.x = -1;
+			tmp.y = -1;
+			break;
+		}
 		horiz_x += xstep;
 		horiz_y += ystep;
 		// printf("xtocheck: %f, ytocheck: %f\n", xtocheck, ytocheck);
 	}
+
+	if (mlx->rays[i].rayfacing_up)
+		tmp.y++;
 	if (mlx->rays[i].found_horz_wall_hit)
+	{
 		ray->distance = distanceBetweenPoints(*mlx->player, tmp) * cos(mlx->rays[i].ray_angle - mlx->player->rotation_angle);
+	}
 	else
 		ray->distance = MAX_NB;
 	// record x and y
@@ -94,7 +108,7 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	ray = malloc(sizeof(t_ray));
 	// find x-cord of the closest vertical grid intersection
 
-	xintercept = floor(mlx->player->x / TILE_SIZE) * TILE_SIZE;
+	xintercept = floor(mlx->player->x / (double)TILE_SIZE) * TILE_SIZE;
 	if (mlx->rays[i].rayfacing_right)
 		xintercept += TILE_SIZE;
 
@@ -114,12 +128,23 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	// used to find the cell containing the wall hit
 	vert_x = xintercept;
 	vert_y = yintercept;
+
+	tmp.x = MAX_NB;
+	tmp.y = MAX_NB;
+
 	// increment xstep and ystep until we find a wall
 	if (mlx->rays[i].rayfacing_left)
 		vert_x--;
 	while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
 	{
-		if (is_wall(vert_x, vert_y, mlx))
+		int hit = is_wall(vert_x, vert_y, mlx);
+		if (hit == 2)
+		{
+			tmp.x = -1;
+			tmp.y = -1;
+			break;
+		}
+		if (hit == 1)
 		{
 			tmp.x = vert_x;
 			tmp.y = vert_y;
@@ -132,13 +157,16 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 		vert_y += ystep;
 		// printf("x: %f, y: %f\n", vert_x, vert_y);
 	}
+	if (mlx->rays[i].rayfacing_left)
+		tmp.x++;
 	if (mlx->rays[i].found_vert_wall_hit)
+	{
 		ray->distance = distanceBetweenPoints(*mlx->player, tmp) * cos(mlx->rays[i].ray_angle - mlx->player->rotation_angle);
+	}
 	else
 		ray->distance = MAX_NB;
 	// record x and y
 	ray->hit_x = tmp.x;
 	ray->hit_y = tmp.y;
-
 	return (ray);
 }

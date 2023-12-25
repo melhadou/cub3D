@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 12:01:35 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/23 17:38:45 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/24 19:28:19 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	dda(t_mlx mlx, t_player start, t_player end)
 
 	dda.dx = end.x - start.x;
 	dda.dy = end.y - start.y;
+	// dda.color = 0x00FF00;
 	dda.color = end.color;
 	dda.steps = fmaxf(fabs(dda.dx), fabs(dda.dy));
 	dda.x_inc = dda.dx / dda.steps;
