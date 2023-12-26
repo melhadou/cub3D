@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:56:37 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 17:23:48 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 21:10:29 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 	// increment xstep and ystep until we find a wall
 	if (mlx->rays[i].rayfacing_up)
 		horiz_y--;
-	while(horiz_x >= 0 && horiz_x <= WINDOW_WIDTH && horiz_y >= 0 && horiz_y <= WINDOW_HEIGHT)
+	// while(horiz_x >= 0 && horiz_x <= WINDOW_WIDTH && horiz_y >= 0 && horiz_y <= WINDOW_HEIGHT)
+	while(1)
 	{
 		int hit = is_wall(horiz_x, horiz_y, mlx);
 		if (hit == 1)
@@ -135,7 +136,8 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	// increment xstep and ystep until we find a wall
 	if (mlx->rays[i].rayfacing_left)
 		vert_x--;
-	while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
+	// while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
+	while(1)
 	{
 		int hit = is_wall(vert_x, vert_y, mlx);
 		// if (hit == 2)

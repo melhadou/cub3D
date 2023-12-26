@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 17:23:24 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 20:32:02 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,14 +146,14 @@ void render_3d_walls(t_mlx *mlx) {
       if (mlx->rays[i].rayfacing_down) {
         p2.color = 0x00ff00;
       } else {
-        p2.color = 0xff00ff;
+        p2.color = 0x0000ff;
       }
     }
    if (mlx->rays[i].found_vert_wall_hit) {
       if (mlx->rays[i].rayfacing_left) {
-        p2.color = 0xe00fa0;
+        p2.color = 0xff0000;
       } else {
-        p2.color = 0xa0a000;
+        p2.color = 0xffff00;
       }
     }
 

@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 17:37:53 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 20:45:26 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,13 @@ int main(int ac, char **av) {
 
 	mlx.map_width = data->width;
 	mlx.map_height = data->height;
-	mlx.player->x = data->player_x * TILE_SIZE;
-	mlx.player->y = data->player_y * TILE_SIZE;
+	mlx.player->x = data->player_x * TILE_SIZE + (double)TILE_SIZE / 2;
+	mlx.player->y = data->player_y * TILE_SIZE + (double)TILE_SIZE / 2;
 
-  draw_map(&mlx);
+  // draw_map(&mlx);
 	cast_rays(&mlx);
-  draw_player(&mlx);
-	// render_3d_walls(&mlx);
+  // draw_player(&mlx);
+	render_3d_walls(&mlx);
 
 	// ft_printer(data);
 	
