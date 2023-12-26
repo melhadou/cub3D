@@ -6,14 +6,13 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/23 18:48:29 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 15:07:02 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
-#include "../libs/libft/libft.h"
-#include "../libs/mlx/mlx.h"
+#include "parser.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
