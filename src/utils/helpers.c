@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/25 21:31:11 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:23:24 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int is_wall(double x, double y, t_mlx *mlx) {
   // if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
   // 	return (1);
   if (out_of_border(x, y, mlx))
-    return 2;
+    return 1;
   int x1 = floor(x / (double)TILE_SIZE);
   int y1 = floor(y / (double)TILE_SIZE);
   if (mlx->map[y1][x1] == '1')
@@ -70,37 +70,23 @@ void cast_rays(t_mlx *mlx) {
     mlx->rays[i].rayfacing_right = ray_angle < 0.5 * M_PI || ray_angle > 1.5 * M_PI;
     mlx->rays[i].rayfacing_left = !mlx->rays[i].rayfacing_right;
 
-    // printf("--------------------------------\n");
-    // printf("up => %d\n", mlx->rays[i].rayfacing_up);
-    // printf("down => %d\n", mlx->rays[i].rayfacing_down);
-    // printf("right => %d\n", mlx->rays[i].rayfacing_right );
-    // printf("left => %d\n", mlx->rays[i].rayfacing_left);
-
     verti_tmp = vertical_intersection(mlx, i);
     horz_tmp = horizontal_intersection(mlx, i);
 
     // record x and y of ray
-
     if (verti_tmp->distance < horz_tmp->distance) {
       mlx->rays[i].distance = verti_tmp->distance;
       mlx->rays[i].hit_y = verti_tmp->hit_y;
       mlx->rays[i].hit_x = verti_tmp->hit_x;
       mlx->rays[i].found_vert_wall_hit = 1;
       mlx->rays[i].found_horz_wall_hit = 0;
-			// printf("vert: ");
     }	else {
 			mlx->rays[i].distance = horz_tmp->distance;
 			mlx->rays[i].hit_y = horz_tmp->hit_y;
 			mlx->rays[i].hit_x = horz_tmp->hit_x; // deault MAX_NB
 			mlx->rays[i].found_horz_wall_hit = 1;
 			mlx->rays[i].found_vert_wall_hit = 0;
-			// printf("horiz: ");
 		}
-
-		// printf("vx: %f, vy: %f, ", verti_tmp->hit_x, verti_tmp->hit_y);
-		// printf("hx: %f, hy: %f\n", horz_tmp->hit_x, horz_tmp->hit_y);
-
-
     free(verti_tmp);
     free(horz_tmp);
     ray_angle += mlx->player->fov_angle / (double)NB_RAYS;

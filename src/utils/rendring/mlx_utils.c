@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:28:55 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/12 17:30:32 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:42:53 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void draw_map(t_mlx *mlx)
 	int x;
 
 	y = 0;
-	while (y < 10)
+	while (y < mlx->map_height)
 	{
 		x = 0;
-		while (x < 10)
+		while (x < mlx->map_width)
 		{
 			if (mlx->map[y][x] == '1')
 				draw_cube(mlx, x, y, 0xFF0000);
@@ -74,9 +74,9 @@ void	draw_player(t_mlx *mlx)
 	int j;
 
 	i = x;
-	while(i < x + 3){
+	while(i < x + 5){
 		j = y;
-		while(j < y + 3)
+		while(j < y + 5)
 		{
 			// mlx_pixel_put(mlx->mlx, mlx->win, i, j, 0x0000FF);
 			my_mlx_pixel_put(mlx->img, i, j, 0x0000FF);

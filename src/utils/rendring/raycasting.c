@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:56:37 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/25 21:46:02 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:23:48 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i)
 			// dda(*mlx, (t_player){mlx->player->x, mlx->player->y}, (t_player){tmp.x, tmp.y});
 			break;
 		}
-		if (hit == 2)
-		{
-			tmp.x = -1;
-			tmp.y = -1;
-			break;
-		}
+		// if (hit == 2)
+		// {
+		// 	tmp.x = -1;
+		// 	tmp.y = -1;
+		// 	break;
+		// }
 		horiz_x += xstep;
 		horiz_y += ystep;
 		// printf("xtocheck: %f, ytocheck: %f\n", xtocheck, ytocheck);
@@ -138,12 +138,12 @@ t_ray *vertical_intersection(t_mlx *mlx, int i)
 	while(vert_x >= 0 && vert_x <= WINDOW_WIDTH && vert_y >= 0 && vert_y <= WINDOW_HEIGHT)
 	{
 		int hit = is_wall(vert_x, vert_y, mlx);
-		if (hit == 2)
-		{
-			tmp.x = -1;
-			tmp.y = -1;
-			break;
-		}
+		// if (hit == 2)
+		// {
+		// 	tmp.x = -1;
+		// 	tmp.y = -1;
+		// 	break;
+		// }
 		if (hit == 1)
 		{
 			tmp.x = vert_x;

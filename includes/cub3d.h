@@ -6,7 +6,7 @@
 /*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 15:07:02 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:46:15 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TILE_SIZE 96
-#define WINDOW_WIDTH 960
-#define WINDOW_HEIGHT 960
+#define TILE_SIZE 32
+#define WINDOW_WIDTH 1080
+#define WINDOW_HEIGHT 720
 #define NB_RAYS WINDOW_WIDTH
 // #define NB_RAYS 1
 #define MAX_NB 100000000
@@ -28,6 +28,7 @@
 
 // check for linux or mac
 #ifdef __linux__
+#include "../libs/mlx/mlx.h"
 
 enum {
 	ESC = 65307,
@@ -43,6 +44,7 @@ enum {
 };
 
 #elif __APPLE__
+#include "mlx.h"
 enum {
 	ESC = 53
 	MLX_MASK = 0,

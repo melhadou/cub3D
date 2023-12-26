@@ -6,7 +6,7 @@
 /*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 00:56:16 by yoelansa          #+#    #+#             */
-/*   Updated: 2023/12/26 15:10:35 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:46:21 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 #include "../libs/libft/libft.h"
 #include "../libs/getnextline/get_next_line.h"
-#include "../libs/mlx/mlx.h"
 
 typedef struct s_parser
 {
