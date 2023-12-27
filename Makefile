@@ -1,5 +1,5 @@
 NAME = cub3d
-CFLAGS = #-g3 -fsanitize=address
+CFLAGS = -g3 -fsanitize=address
 MAKE = make
 
 # ********************** Checking OS **********************
