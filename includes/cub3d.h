@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 20:48:41 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:43:44 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ typedef struct t_player
 /* ****************** put pixel struct ****************** */
 typedef struct t_data
 {
+	// #unes
+	int height;
+	int width;
+	//==
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -113,6 +117,36 @@ typedef struct t_data
 /* ****************** Mlx struct ****************** */
 typedef struct t_mlx
 {
+	// declaration for textures
+	//==
+	char	*south;
+	int		bits_per_pixel1;
+	int		line_lenght1;
+	int		endian1;
+	int sheight;
+	int swidth;
+
+	char	*west;
+	int		bits_per_pixel2;
+	int		line_lenght2;
+	int		endian2;
+	int wheight;
+	int wwidth;
+	
+	char	*east;
+	int		bits_per_pixel3;
+	int		line_lenght3;
+	int		endian3;
+	int eheight;
+	int ewidth;
+	
+	char	*north;
+	int		bits_per_pixel4;
+	int		line_lenght4;
+	int		endian4;
+	int nheight;
+	int nwidth;
+	// --------------
 	void *mlx;
 	void *win;
 	t_player *player;
@@ -141,8 +175,9 @@ void update_movment(t_mlx *mlx);
 void update_movment_sides(t_mlx *mlx, int side);
 
 /* ****************** DDA Util_Functions ****************** */
-void	dda(t_mlx mlx, t_player start, t_player end);
-
+// void	dda(t_mlx mlx, t_player start, t_player end);
+// void	dda(t_mlx mlx, t_player start, t_player end, double wall_height);
+void	draw_textures(t_mlx *mlx, double lineh, int r, int side);
 /* ****************** Helpers Util_Functions ****************** */
 double angle_normalize(double angle);
 int is_wall(double x, double y, t_mlx *mlx);

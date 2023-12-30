@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 20:32:02 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:00:43 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void render_3d_walls(t_mlx *mlx) {
   double wall_strip_height;
 
   int i;
+  int side;
 
   i = 0;
   t_player p1;
@@ -144,16 +145,17 @@ void render_3d_walls(t_mlx *mlx) {
 		// if up right a and its a hirizontal hit choose vertical
     if (mlx->rays[i].found_horz_wall_hit) {
       if (mlx->rays[i].rayfacing_down) {
-        p2.color = 0x00ff00;
+        side = 2;
       } else {
-        p2.color = 0x0000ff;
+        side = 1;
       }
     }
    if (mlx->rays[i].found_vert_wall_hit) {
       if (mlx->rays[i].rayfacing_left) {
-        p2.color = 0xff0000;
+        side = 4;
+        
       } else {
-        p2.color = 0xffff00;
+        side = 3;
       }
     }
 
@@ -180,7 +182,8 @@ void render_3d_walls(t_mlx *mlx) {
     p2.x = i;
     p2.y = ((double)WINDOW_HEIGHT / 2) + (wall_strip_height / (double)2);
 
-    dda(*mlx, p1, p2);
+    // dda(*mlx, p1, p2, wall_strip_height);
+    draw_textures(mlx, wall_strip_height, i, side);
     i++;
   }
 }

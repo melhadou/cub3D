@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 00:56:16 by yoelansa          #+#    #+#             */
-/*   Updated: 2023/12/26 17:46:21 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:54:29 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_parser
 	char	*w;
 	char	*e;
 	char	*s;
+	// floor and ceilling need to be in hexadecimal form ask rida bout it
 	int		floor[3];
 	int		ceil[3];
 	char	**map;

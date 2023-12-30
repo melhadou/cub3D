@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_checks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:15:59 by yoelansa          #+#    #+#             */
-/*   Updated: 2023/12/26 15:04:31 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:27:45 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	data_initialize(t_parser **data)
 int	filename_check_open(char *name, int *fd)
 {
 	*fd = 0;
-	if (!name[0])
+	if (!name[0] || name[0] == '.')
 		return (ft_exit_error
-			("Error: Argument must not be empty!"), -1);
+			("Error: Try a valid name for your mapfile!"), -1);
 	if (!ft_strrchr(name, '.'))
 		return (ft_exit_error
 			("Error: The map name must contain .cub extention!"), -1);

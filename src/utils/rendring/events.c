@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 17:30:19 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:02:01 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	key_press(int key, t_mlx *mlx)
 	}
 	// need to check if the
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
-  mlx->img->img = mlx_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-  mlx->img->addr = mlx_get_data_addr(mlx->img->img, &(mlx->img->bits_per_pixel),
+	mlx->img->img = mlx_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx->img->addr = mlx_get_data_addr(mlx->img->img, &(mlx->img->bits_per_pixel),
                                     &mlx->img->line_lenght, &mlx->img->endian);
   // draw_map(mlx);
 	cast_rays(mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melhadou <melhadou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/26 20:45:26 by melhadou         ###   ########.fr       */
+/*   Updated: 2023/12/30 16:24:39 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,36 @@ void init_player(t_player *player)
 	player->fov_angle = deg2rad(60);
 }
 
+//// unes
+
+void	get_textures(t_mlx *mlx, t_parser *parser)
+{
+	void *south;
+	void *west;
+	void *east;
+	void *north;
+
+	// mlx->txt = malloc (sizeof(t_data) * 4);
+	
+	south = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/profile.xpm", &mlx->swidth, &mlx->sheight);
+	west = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/melhadou.xpm", &mlx->wwidth, &mlx->wheight);
+	east = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/mtellami.xpm", &mlx->ewidth, &mlx->eheight);
+	north = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/omansour.xpm", &mlx->nwidth, &mlx->nheight);
+	if (!south || !west || !east || !north)
+		ft_exit_error("Error: Wrong path!");
+	mlx->south = mlx_get_data_addr(south, &mlx->bits_per_pixel1, &mlx->line_lenght1, &mlx->endian1);
+	mlx->west = mlx_get_data_addr(west, &mlx->bits_per_pixel2, &mlx->line_lenght2, &mlx->endian2);
+	mlx->east = mlx_get_data_addr(east, &mlx->bits_per_pixel3, &mlx->line_lenght3, &mlx->endian3);
+	mlx->north = mlx_get_data_addr(north, &mlx->bits_per_pixel4, &mlx->line_lenght4, &mlx->endian4);
+}
+
+//-------------
+
+
 int main(int ac, char **av) {
 
-  t_mlx mlx;
-  t_player player;
+    t_mlx mlx;
+    t_player player;
 	t_ray rays[NB_RAYS];
 	int fd;
 	t_parser *data;
@@ -70,54 +96,21 @@ int main(int ac, char **av) {
 	data_initialize(&data);
 	line = "";
 	parser_brain(&data, &fd, line, av[1]);
-  // char map[10][10] = {{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-  //                     {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-  //                     {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-  //                     {'1', '0', '0', '1', '1', '1', '0', '0', '1', '1'},
-  //                     {'1', '0', '1', '0', '0', '1', '0', '0', '0', '1'},
-  //                     {'1', '0', '1', '0', '0', '0', '0', '1', '1', '1'},
-  //                     {'1', '0', '1', '0', '0', '0', '0', '0', '0', '1'},
-  //                     {'1', '0', '0', '0', '1', '1', '1', '0', '0', '1'},
-  //                     {'1', '0', '0', '0', '0', '1', '1', '0', '0', '1'},
-  //                     {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'}};
-
- //  char map[10][10] = {{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '1', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
- //                      {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'}};
-
- //  mlx.map = malloc(11 * 10 * sizeof(char));
-	// mlx.map[0] = map[0];
-	// mlx.map[1] = map[1];
-	// mlx.map[2] = map[2];
-	// mlx.map[3] = map[3];
-	// mlx.map[4] = map[4];
-	// mlx.map[5] = map[5];
-	// mlx.map[6] = map[6];
-	// mlx.map[7] = map[7];
-	// mlx.map[8] = map[8];
-	// mlx.map[9] = map[9];
-	// mlx.map[10] = NULL;
-
-	// mlx.map_width = 10;
-	// mlx.map_width = 10;
-  mlx.img = malloc(sizeof(t_data));
-  if (!mlx.img)
-    exit(1);
-  mlx.mlx = mlx_init();
-  mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
-  mlx.img->img = mlx_new_image(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-  mlx.img->addr = mlx_get_data_addr(mlx.img->img, &(mlx.img->bits_per_pixel),
-                                    &mlx.img->line_lenght, &mlx.img->endian);
+	mlx.img = malloc(sizeof(t_data));
+	if (!mlx.img)
+	  exit(1);
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
+	mlx.img->img = mlx_new_image(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx.img->addr = mlx_get_data_addr(mlx.img->img, &(mlx.img->bits_per_pixel),
+	                                  &mlx.img->line_lenght, &mlx.img->endian);
 	init_player(&player);
-  mlx.cube_size = TILE_SIZE;
-  mlx.player = &player;
+
+
+
+
+  	mlx.cube_size = TILE_SIZE;
+  	mlx.player = &player;
 	mlx.rays = rays;
 	
 	mlx.map = data->map;
@@ -127,8 +120,11 @@ int main(int ac, char **av) {
 	mlx.player->x = data->player_x * TILE_SIZE + (double)TILE_SIZE / 2;
 	mlx.player->y = data->player_y * TILE_SIZE + (double)TILE_SIZE / 2;
 
-  // draw_map(&mlx);
+  	// draw_map(&mlx);
+	// mlx.txt = malloc (sizeof(t_data) * 4);
+	get_textures(&mlx, data);
 	cast_rays(&mlx);
+	
   // draw_player(&mlx);
 	render_3d_walls(&mlx);
 
@@ -137,7 +133,7 @@ int main(int ac, char **av) {
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
 	mlx_hook(mlx.win, 2, MLX_MASK, &key_press, &mlx);
 	mlx_hook(mlx.win, 3, MLX_MASK, &key_relase, &mlx);
-  mlx_hook(mlx.win, 17, MLX_MASK, &destroy_win, &mlx);
+	mlx_hook(mlx.win, 17, MLX_MASK, &destroy_win, &mlx);
   
 	// ft_free(data->map);
 	// free(data);
