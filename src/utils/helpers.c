@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/29 20:00:43 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/30 16:28:28 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ void render_3d_walls(t_mlx *mlx) {
 
     // dda(*mlx, p1, p2, wall_strip_height);
     draw_textures(mlx, wall_strip_height, i, side);
+    
     i++;
   }
 }
