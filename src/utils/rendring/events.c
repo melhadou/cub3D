@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/29 18:02:01 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 12:19:01 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,9 @@ int	key_press(int key, t_mlx *mlx)
 		update_movment(mlx);
 	}
 	else if (key == D_KEY)
-	{
-		// should move to the right of the plyer looking
 		update_movment_sides(mlx, 1);
-	}
 	else if (key == A_KEY)
-	{
-		// should move to the left of the plyer looking
 		update_movment_sides(mlx, -1);
-	}
 	else if (key == RIGHT_ARROW)
 	{
 		mlx->player->turn_direction = 1;

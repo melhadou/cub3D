@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/30 16:24:39 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/30 23:41:57 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void	get_textures(t_mlx *mlx, t_parser *parser)
 	void *north;
 
 	// mlx->txt = malloc (sizeof(t_data) * 4);
-	
-	south = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/profile.xpm", &mlx->swidth, &mlx->sheight);
-	west = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/melhadou.xpm", &mlx->wwidth, &mlx->wheight);
-	east = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/mtellami.xpm", &mlx->ewidth, &mlx->eheight);
-	north = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/omansour.xpm", &mlx->nwidth, &mlx->nheight);
+	south 	=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/lag.xpm", &mlx->swidth, &mlx->sheight);
+	west	 	=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/crew.xpm", &mlx->wwidth, &mlx->wheight);
+	east 		=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/guns.xpm", &mlx->ewidth, &mlx->eheight);
+	north 	=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/hitler.xpm", &mlx->nwidth, &mlx->nheight);
+
 	if (!south || !west || !east || !north)
 		ft_exit_error("Error: Wrong path!");
 	mlx->south = mlx_get_data_addr(south, &mlx->bits_per_pixel1, &mlx->line_lenght1, &mlx->endian1);

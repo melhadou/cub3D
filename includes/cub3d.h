@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/29 20:43:44 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 12:16:09 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ enum {
 	D_KEY = 100,
 };
 #endif
+
+typedef struct t_cast
+{
+	double xstep;
+	double ystep;
+	double xintercept;
+	double yintercept;
+	double x;
+	double y;
+
+} t_cast;
 
 typedef struct t_ray
 {
@@ -183,12 +194,15 @@ double angle_normalize(double angle);
 int is_wall(double x, double y, t_mlx *mlx);
 void cast_rays(t_mlx *mlx);
 double distanceBetweenPoints(t_player p1, t_player p2);
-void draw_rectangle(t_player p1, t_player p2, t_mlx *mlx, int color);
 void render_3d_walls(t_mlx *mlx);
-void clear_mlx_img(t_mlx *mlx);
+void set_corr_values(t_mlx *mlx, int i);
+void get_direction(t_mlx *mlx, int i, double ray_angle);
+void core_3d_rendrer(t_mlx *mlx, int i, double wall_strip_height);
 
 /* ****************** Ray Casting Functions ****************** */
 t_ray *vertical_intersection(t_mlx *mlx, int i);
 t_ray *horizontal_intersection(t_mlx *mlx, int i);
+void core_vertical(t_mlx *mlx, t_cast core, t_ray *ray, int i);
+void core_horizontal(t_mlx *mlx, t_cast core, t_ray *ray, int i);
 
 #endif
