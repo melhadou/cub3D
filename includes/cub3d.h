@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/31 14:10:02 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 16:33:39 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,29 +126,29 @@ typedef struct t_mlx
 	int		bits_per_pixel1;
 	int		line_lenght1;
 	int		endian1;
-	int sheight;
-	int swidth;
+	int sh; //width
+	int sw; //height
 
 	char	*west;
 	int		bits_per_pixel2;
 	int		line_lenght2;
 	int		endian2;
-	int wheight;
-	int wwidth;
+	int wh;
+	int ww;
 	
 	char	*east;
 	int		bits_per_pixel3;
 	int		line_lenght3;
 	int		endian3;
-	int eheight;
-	int ewidth;
+	int eh;
+	int ew;
 	
 	char	*north;
 	int		bits_per_pixel4;
 	int		line_lenght4;
 	int		endian4;
-	int nheight;
-	int nwidth;
+	int nh;
+	int nw;
 	// --------------
 	void *mlx;
 	void *win;

@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/31 14:09:42 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 16:34:07 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void init_player(t_player *player)
 
 //// unes
 
-void	get_textures(t_mlx *mlx, t_parser *parser)
+void	get_textures(t_mlx *mlx, t_parser *p)
 {
 	void *south;
 	void *west;
@@ -63,10 +63,10 @@ void	get_textures(t_mlx *mlx, t_parser *parser)
 
 	// mlx->txt = malloc (sizeof(t_data) * 4);
 	
-	south = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/profile.xpm", &mlx->swidth, &mlx->sheight);
-	west = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/melhadou.xpm", &mlx->wwidth, &mlx->wheight);
-	east = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/mtellami.xpm", &mlx->ewidth, &mlx->eheight);
-	north = mlx_xpm_file_to_image(mlx->mlx, "/home/uns-35/Desktop/cub3D/omansour.xpm", &mlx->nwidth, &mlx->nheight);
+	south = mlx_xpm_file_to_image(mlx->mlx, p->s, &mlx->sw, &mlx->sh);
+	west = mlx_xpm_file_to_image(mlx->mlx, p->w, &mlx->ww, &mlx->wh);
+	east = mlx_xpm_file_to_image(mlx->mlx, p->e, &mlx->ew, &mlx->eh);
+	north = mlx_xpm_file_to_image(mlx->mlx, p->n, &mlx->nw, &mlx->nh);
 	if (!south || !west || !east || !north)
 		ft_exit_error("Error: Wrong path!");
 	mlx->south = mlx_get_data_addr(south, &mlx->bits_per_pixel1, &mlx->line_lenght1, &mlx->endian1);
