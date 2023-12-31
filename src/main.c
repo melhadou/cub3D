@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/30 16:24:39 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 14:09:42 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int main(int ac, char **av) {
   	// draw_map(&mlx);
 	// mlx.txt = malloc (sizeof(t_data) * 4);
 	get_textures(&mlx, data);
+	mlx.ceil_color = rgb_to_hex(data->ceil);
+	mlx.fl_color = rgb_to_hex(data->floor);
 	cast_rays(&mlx);
 	
   // draw_player(&mlx);

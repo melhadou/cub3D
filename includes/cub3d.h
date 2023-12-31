@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/29 20:43:44 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 14:10:02 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ typedef struct t_mlx
 {
 	// declaration for textures
 	//==
+	int	fl_color;
+	int	ceil_color;
+	
 	char	*south;
 	int		bits_per_pixel1;
 	int		line_lenght1;
@@ -177,7 +180,11 @@ void update_movment_sides(t_mlx *mlx, int side);
 /* ****************** DDA Util_Functions ****************** */
 // void	dda(t_mlx mlx, t_player start, t_player end);
 // void	dda(t_mlx mlx, t_player start, t_player end, double wall_height);
-void	draw_textures(t_mlx *mlx, double lineh, int r, int side);
+void	draw_textures(t_mlx *mlx, double lineh, int r, double y1);
+void     draw_floor(t_mlx *mlx, double wall_strip_height, double lineo, int r);
+void    draw_ceilling(t_mlx *mlx, double lineo, int r);
+int	rgb_to_hex(int rgb[3]);
+
 /* ****************** Helpers Util_Functions ****************** */
 double angle_normalize(double angle);
 int is_wall(double x, double y, t_mlx *mlx);

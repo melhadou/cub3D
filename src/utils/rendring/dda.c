@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 12:01:35 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/30 16:28:17 by uns-35           ###   ########.fr       */
+/*   Updated: 2023/12/31 14:09:51 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,12 @@
 // 	}
 // }
 
-void	draw_textures(t_mlx *mlx, double lineh, int r, int side)
+void	draw_textures(t_mlx *mlx, double lineh, int r, double y1)
 { 
 	char	*dst;
 	int		i;
-	double y1;
 
 	i = 0;
-	lineh = (TILE_SIZE * WINDOW_HEIGHT) / mlx->rays[r].distance;
-	double var = lineh;
-	if (var > WINDOW_HEIGHT)
-		var = WINDOW_HEIGHT;
-	y1 = (WINDOW_HEIGHT / 2.0) - (var / 2.0);
 	if (lineh > WINDOW_HEIGHT)
 		i = (lineh - WINDOW_HEIGHT) / 2;
 	mlx->rays[r].ray_angle = angle_normalize(mlx->rays[r].ray_angle);
@@ -86,5 +80,31 @@ void	draw_textures(t_mlx *mlx, double lineh, int r, int side)
 		i++;
 	}
 }
+
+void     draw_floor(t_mlx *mlx, double wall_strip_height, double lineo, int r)
+{
+	int i = wall_strip_height+lineo;
+	while (i < WINDOW_HEIGHT)
+	{
+		my_mlx_pixel_put(mlx->img, r, i, mlx->fl_color);
+		i++;
+	}
+}
+void    draw_ceilling(t_mlx *mlx, double lineo, int r)
+{
+	int i = 0;
+	while (i < lineo)
+	{
+		my_mlx_pixel_put(mlx->img, r, i, mlx->ceil_color);
+		i++;
+	}
+}
+
+int	rgb_to_hex(int rgb[3])
+{
+	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
+}
+
+
 
 

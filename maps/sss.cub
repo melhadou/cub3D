@@ -3,8 +3,8 @@
                            					SO hhh_south.xpm   
 EA                                    hhh_east.xpm    
 
-C  0,255,17          
-F 0,128,8
+C  255, 103, 31         
+F 4, 106,56
 
                                         11111
                                        1000001
