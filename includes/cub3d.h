@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/31 16:33:39 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/01 18:16:08 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,10 @@ void update_movment_sides(t_mlx *mlx, int side);
 void	draw_textures(t_mlx *mlx, double lineh, int r, double y1);
 void     draw_floor(t_mlx *mlx, double wall_strip_height, double lineo, int r);
 void    draw_ceilling(t_mlx *mlx, double lineo, int r);
-int	rgb_to_hex(int rgb[3]);
+int		rgb_to_hex(int rgb[3]);
+char	*drawing_formula_x(t_mlx *mlx, double lineh, int i, int r);
+char	*drawing_formula_y(t_mlx *mlx, double lineh, int i, int r);
+
 
 /* ****************** Helpers Util_Functions ****************** */
 double angle_normalize(double angle);

@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/31 16:34:07 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/01 18:33:06 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,30 @@ void init_player(t_player *player)
 
 //// unes
 
-void	get_textures(t_mlx *mlx, t_parser *p)
+void	get_textures(t_mlx *m, t_parser *p)
 {
-	void *south;
-	void *west;
-	void *east;
-	void *north;
+	void	*south;
+	void	*west;
+	void	*east;
+	void	*north;
 
-	// mlx->txt = malloc (sizeof(t_data) * 4);
-	
-	south = mlx_xpm_file_to_image(mlx->mlx, p->s, &mlx->sw, &mlx->sh);
-	west = mlx_xpm_file_to_image(mlx->mlx, p->w, &mlx->ww, &mlx->wh);
-	east = mlx_xpm_file_to_image(mlx->mlx, p->e, &mlx->ew, &mlx->eh);
-	north = mlx_xpm_file_to_image(mlx->mlx, p->n, &mlx->nw, &mlx->nh);
+	south = mlx_xpm_file_to_image(m->mlx, p->s, &m->sw, &m->sh);
+	west = mlx_xpm_file_to_image(m->mlx, p->w, &m->ww, &m->wh);
+	east = mlx_xpm_file_to_image(m->mlx, p->e, &m->ew, &m->eh);
+	north = mlx_xpm_file_to_image(m->mlx, p->n, &m->nw, &m->nh);
 	if (!south || !west || !east || !north)
 		ft_exit_error("Error: Wrong path!");
-	mlx->south = mlx_get_data_addr(south, &mlx->bits_per_pixel1, &mlx->line_lenght1, &mlx->endian1);
-	mlx->west = mlx_get_data_addr(west, &mlx->bits_per_pixel2, &mlx->line_lenght2, &mlx->endian2);
-	mlx->east = mlx_get_data_addr(east, &mlx->bits_per_pixel3, &mlx->line_lenght3, &mlx->endian3);
-	mlx->north = mlx_get_data_addr(north, &mlx->bits_per_pixel4, &mlx->line_lenght4, &mlx->endian4);
+	m->south = mlx_get_data_addr(south, &m->bits_per_pixel1,
+			&m->line_lenght1, &m->endian1);
+	m->west = mlx_get_data_addr(west, &m->bits_per_pixel2,
+			&m->line_lenght2, &m->endian2);
+	m->east = mlx_get_data_addr(east, &m->bits_per_pixel3,
+			&m->line_lenght3, &m->endian3);
+	m->north = mlx_get_data_addr(north, &m->bits_per_pixel4,
+			&m->line_lenght4, &m->endian4);
 }
 
 //-------------
-
 
 int main(int ac, char **av) {
 
