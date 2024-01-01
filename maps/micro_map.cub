@@ -1,0 +1,12 @@
+EA ./textures/1.xpm
+NO ./textures/2.xpm
+SO ./textures/3.xpm
+WE ./textures/4.xpm
+
+C 64,47,29
+F 51,51,51
+
+
+ 1
+1N1
+ 1

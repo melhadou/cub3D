@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 21:25:21 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 22:54:28 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,17 @@ void	get_textures(t_mlx *m, t_parser *p)
 			&m->line_lenght4, &m->endian4);
 }
 
-// void set_player_direction(t_mlx *mlx, t_parser *data)
-// {
-// 	if (data->w)
-// }
+void set_player_direction(t_mlx *mlx, t_parser *data)
+{
+	if (data->player == 'S')
+		mlx->player->rotation_angle = deg2rad(270);
+	else if (data->player == 'W')
+		mlx->player->rotation_angle = deg2rad(180);
+	else if (data->player == 'E')
+		mlx->player->rotation_angle = deg2rad(0);
+	else if (data->player == 'N')
+		mlx->player->rotation_angle = deg2rad(90);
+}
 
 int main(int ac, char **av) {
 
@@ -106,6 +113,7 @@ int main(int ac, char **av) {
 	mlx.img->addr = mlx_get_data_addr(mlx.img->img, &(mlx.img->bits_per_pixel),
 	                                  &mlx.img->line_lenght, &mlx.img->endian);
 	init_player(&player);
+	mlx.mouse_x = 0;
   mlx.cube_size = TILE_SIZE;
   mlx.player = &player;
 	mlx.rays = rays;
@@ -114,8 +122,7 @@ int main(int ac, char **av) {
 	mlx.map_height = data->height;
 	mlx.player->x = data->player_x * TILE_SIZE + (double)TILE_SIZE / 2;
 	mlx.player->y = data->player_y * TILE_SIZE + (double)TILE_SIZE / 2;
-
-	printf("player %c \n", data->player);
+	set_player_direction(&mlx, data);
 
 	get_textures(&mlx, data);
 	mlx.ceil_color = rgb_to_hex(data->ceil);
@@ -124,8 +131,10 @@ int main(int ac, char **av) {
 	render_3d_walls(&mlx);
 
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
+	// mlx_mouse_hook(mlx.win, mouse_move, &mlx);
+	mlx_hook(mlx.win, 6, 64, &mouse_move, &mlx);
 	mlx_hook(mlx.win, 2, MLX_MASK, &key_press, &mlx);
-	mlx_hook(mlx.win, 3, MLX_MASK, &key_relase, &mlx);
+	mlx_hook(mlx.win, 3, (1L<<1), &key_relase, &mlx);
 	mlx_hook(mlx.win, 17, MLX_MASK, &destroy_win, &mlx);
   
 	// ft_free(data->map);

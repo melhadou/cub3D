@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:35:09 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 21:10:14 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 22:55:19 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void update_movment(t_mlx *mlx)
 		if (!is_wall(x, y, mlx))
 			mlx->player->x = x;
 	}
-	if (!is_wall(x, mlx->player->y, mlx))
+	else if (!is_wall(x, mlx->player->y, mlx))
 	{
 		y = mlx->player->y + sin(mlx->player->rotation_angle) * move_step;
 		mlx->player->x = x;
@@ -139,7 +139,7 @@ void update_movment_sides(t_mlx *mlx, int side)
 		if (!is_wall(x, y, mlx))
 			mlx->player->x = x;
 	}
-	if (!is_wall(x, mlx->player->y, mlx))
+	else if (!is_wall(x, mlx->player->y, mlx))
 	{
 		y = mlx->player->y + 
 			sin(mlx->player->rotation_angle + M_PI_2 * side ) * move_step;
@@ -147,4 +147,16 @@ void update_movment_sides(t_mlx *mlx, int side)
 		if (!is_wall(x, y, mlx))
 			mlx->player->y = y;
 	}
+}
+
+int mouse_move(int x, int y, t_mlx *mlx)
+{
+	if (x < mlx->mouse_x) {
+		arrow_keys(mlx, LEFT_ARROW);
+	} else if (x > mlx->mouse_x) {
+		arrow_keys(mlx, RIGHT_ARROW);
+	}
+	update_image(mlx);
+	mlx->mouse_x = x;
+	return 0;
 }
