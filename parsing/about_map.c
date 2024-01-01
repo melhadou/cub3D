@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   about_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:43:57 by yoelansa          #+#    #+#             */
-/*   Updated: 2023/12/16 14:46:00 by yoelansa         ###   ########.fr       */
+/*   Updated: 2024/01/01 21:07:45 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	get_map_width(char **map, int height)
 int	check_player(t_parser *data, int i, int j)
 {
 	int		count;
-	char	c;
 
 	i = -1;
 	count = 0;
@@ -108,10 +107,11 @@ int	check_player(t_parser *data, int i, int j)
 		while (data->map[i][++j])
 		{
 			check_borders(data, i, j);
-			c = data->map[i][j];
-			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
 				count++;
+				data->player = data->map[i][j];
 				data->player_x = j;
 				data->player_y = i;
 			}
