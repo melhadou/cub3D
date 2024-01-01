@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 16:44:09 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 21:06:47 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,4 +213,6 @@ void core_vertical(t_mlx *mlx, t_cast core, t_ray *ray, int i);
 void core_horizontal(t_mlx *mlx, t_cast core, t_ray *ray, int i);
 
 void update_image(t_mlx *mlx);
+void arrow_keys(t_mlx *mlx, int key);
+void movments_keys(t_mlx *mlx, int key);
 #endif

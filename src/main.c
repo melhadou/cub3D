@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 14:49:35 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 21:12:30 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_printer(t_parser *data)
 	int	i;
 
 	i = 0;
-	printf("South : '%s'\n", data->n);
-	printf("South : '%s'\n", data->w);
-	printf("South : '%s'\n", data->e);
+	printf("north : '%s'\n", data->n);
+	printf("west : '%s'\n", data->w);
+	printf("east : '%s'\n", data->e);
 	printf("South : '%s'\n\n", data->s);
 	printf("Floor (");
 	for (i = 0; i < 3; i++)
@@ -53,7 +53,6 @@ void init_player(t_player *player)
 }
 
 //// unes
-
 void	get_textures(t_mlx *mlx, t_parser *p)
 {
 	void *south;
@@ -75,13 +74,16 @@ void	get_textures(t_mlx *mlx, t_parser *p)
 	mlx->north = mlx_get_data_addr(north, &mlx->bits_per_pixel4, &mlx->line_lenght4, &mlx->endian4);
 }
 
+// void set_player_direction(t_mlx *mlx, t_parser *data)
+// {
+// 	if (data->w)
+// }
+
 //-------------
-
-
 int main(int ac, char **av) {
 
-    t_mlx mlx;
-    t_player player;
+  t_mlx mlx;
+  t_player player;
 	t_ray rays[NB_RAYS];
 	int fd;
 	t_parser *data;
@@ -105,33 +107,22 @@ int main(int ac, char **av) {
 	mlx.img->addr = mlx_get_data_addr(mlx.img->img, &(mlx.img->bits_per_pixel),
 	                                  &mlx.img->line_lenght, &mlx.img->endian);
 	init_player(&player);
-
-
-
-
   	mlx.cube_size = TILE_SIZE;
   	mlx.player = &player;
 	mlx.rays = rays;
-	
 	mlx.map = data->map;
-
 	mlx.map_width = data->width;
 	mlx.map_height = data->height;
 	mlx.player->x = data->player_x * TILE_SIZE + (double)TILE_SIZE / 2;
 	mlx.player->y = data->player_y * TILE_SIZE + (double)TILE_SIZE / 2;
-
   	// draw_map(&mlx);
 	// mlx.txt = malloc (sizeof(t_data) * 4);
 	get_textures(&mlx, data);
 	mlx.ceil_color = rgb_to_hex(data->ceil);
 	mlx.fl_color = rgb_to_hex(data->floor);
 	cast_rays(&mlx);
-	
   // draw_player(&mlx);
 	render_3d_walls(&mlx);
-
-	// ft_printer(data);
-	
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
 	mlx_hook(mlx.win, 2, MLX_MASK, &key_press, &mlx);
 	mlx_hook(mlx.win, 3, MLX_MASK, &key_relase, &mlx);
