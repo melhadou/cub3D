@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/30 23:41:57 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 14:49:35 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void init_player(t_player *player)
 
 //// unes
 
-void	get_textures(t_mlx *mlx, t_parser *parser)
+void	get_textures(t_mlx *mlx, t_parser *p)
 {
 	void *south;
 	void *west;
@@ -62,11 +62,11 @@ void	get_textures(t_mlx *mlx, t_parser *parser)
 	void *north;
 
 	// mlx->txt = malloc (sizeof(t_data) * 4);
-	south 	=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/lag.xpm", &mlx->swidth, &mlx->sheight);
-	west	 	=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/crew.xpm", &mlx->wwidth, &mlx->wheight);
-	east 		=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/guns.xpm", &mlx->ewidth, &mlx->eheight);
-	north 	=	 mlx_xpm_file_to_image(mlx->mlx, "/home/melhadou/Dev/cursus/cub3ss/textures/hitler.xpm", &mlx->nwidth, &mlx->nheight);
-
+	
+	south = mlx_xpm_file_to_image(mlx->mlx, p->s, &mlx->sw, &mlx->sh);
+	west = mlx_xpm_file_to_image(mlx->mlx, p->w, &mlx->ww, &mlx->wh);
+	east = mlx_xpm_file_to_image(mlx->mlx, p->e, &mlx->ew, &mlx->eh);
+	north = mlx_xpm_file_to_image(mlx->mlx, p->n, &mlx->nw, &mlx->nh);
 	if (!south || !west || !east || !north)
 		ft_exit_error("Error: Wrong path!");
 	mlx->south = mlx_get_data_addr(south, &mlx->bits_per_pixel1, &mlx->line_lenght1, &mlx->endian1);
@@ -123,6 +123,8 @@ int main(int ac, char **av) {
   	// draw_map(&mlx);
 	// mlx.txt = malloc (sizeof(t_data) * 4);
 	get_textures(&mlx, data);
+	mlx.ceil_color = rgb_to_hex(data->ceil);
+	mlx.fl_color = rgb_to_hex(data->floor);
 	cast_rays(&mlx);
 	
   // draw_player(&mlx);

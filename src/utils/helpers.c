@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/31 12:17:43 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 14:59:03 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,14 @@ void core_3d_rendrer(t_mlx *mlx, int i, double wall_strip_height)
 		else
 			side = 3;
 	}
-	draw_textures(mlx, wall_strip_height, i, side);
+	wall_strip_height = (TILE_SIZE * WINDOW_HEIGHT) / mlx->rays[i].distance;
+	double var = wall_strip_height;
+	if (var > WINDOW_HEIGHT)
+		var = WINDOW_HEIGHT;
+	double lineo = (WINDOW_HEIGHT / 2.0) - (var / 2.0);
+	draw_textures(mlx, wall_strip_height, i, lineo);
+	draw_floor(mlx, wall_strip_height, lineo, i);
+	draw_ceilling(mlx, lineo, i);
 }
 
 void render_3d_walls(t_mlx *mlx)
@@ -141,11 +148,11 @@ void render_3d_walls(t_mlx *mlx)
   i = 0;
   while (i < NB_RAYS)
 	{
-    ray_distance = mlx->rays[i].distance;
-    dist_project_plane =
-        ((double)WINDOW_WIDTH / 2) / tan(mlx->player->fov_angle / 2);
-    wall_strip_height = ((double)TILE_SIZE / ray_distance)* dist_project_plane;
+    // ray_distance = mlx->rays[i].distance;
+    // dist_project_plane =
+    //     ((double)WINDOW_WIDTH / 2) / tan(mlx->player->fov_angle / 2);
+    // wall_strip_height = ((double)TILE_SIZE / ray_distance)* dist_project_plane;
 		core_3d_rendrer(mlx, i, wall_strip_height);
-    i++;
-  }
+		i++;
+	}
 }

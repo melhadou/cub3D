@@ -1,13 +1,13 @@
 NAME = cub3d
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address
 MAKE = make
 
 # ********************** Checking OS **********************
 ifeq ($(UNAME), Darwin) # iMac / iOS
-	CC = @gcc
+	CC = @cc
 	LFLAGS += -framework OpenGL -framework AppKit
 else #Linux and others...
-	CC = @gcc
+	CC = @cc
 	LFLAGS += -lbsd -lXext -lX11 -lm
 endif
 

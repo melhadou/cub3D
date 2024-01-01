@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/31 12:16:09 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/01 16:44:09 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,33 +130,36 @@ typedef struct t_mlx
 {
 	// declaration for textures
 	//==
+	int	fl_color;
+	int	ceil_color;
+	
 	char	*south;
 	int		bits_per_pixel1;
 	int		line_lenght1;
 	int		endian1;
-	int sheight;
-	int swidth;
+	int sh; //width
+	int sw; //height
 
 	char	*west;
 	int		bits_per_pixel2;
 	int		line_lenght2;
 	int		endian2;
-	int wheight;
-	int wwidth;
+	int wh;
+	int ww;
 	
 	char	*east;
 	int		bits_per_pixel3;
 	int		line_lenght3;
 	int		endian3;
-	int eheight;
-	int ewidth;
+	int eh;
+	int ew;
 	
 	char	*north;
 	int		bits_per_pixel4;
 	int		line_lenght4;
 	int		endian4;
-	int nheight;
-	int nwidth;
+	int nh;
+	int nw;
 	// --------------
 	void *mlx;
 	void *win;
@@ -188,7 +191,11 @@ void update_movment_sides(t_mlx *mlx, int side);
 /* ****************** DDA Util_Functions ****************** */
 // void	dda(t_mlx mlx, t_player start, t_player end);
 // void	dda(t_mlx mlx, t_player start, t_player end, double wall_height);
-void	draw_textures(t_mlx *mlx, double lineh, int r, int side);
+void	draw_textures(t_mlx *mlx, double lineh, int r, double y1);
+void     draw_floor(t_mlx *mlx, double wall_strip_height, double lineo, int r);
+void    draw_ceilling(t_mlx *mlx, double lineo, int r);
+int	rgb_to_hex(int rgb[3]);
+
 /* ****************** Helpers Util_Functions ****************** */
 double angle_normalize(double angle);
 int is_wall(double x, double y, t_mlx *mlx);
@@ -205,4 +212,5 @@ t_ray *horizontal_intersection(t_mlx *mlx, int i);
 void core_vertical(t_mlx *mlx, t_cast core, t_ray *ray, int i);
 void core_horizontal(t_mlx *mlx, t_cast core, t_ray *ray, int i);
 
+void update_image(t_mlx *mlx);
 #endif
