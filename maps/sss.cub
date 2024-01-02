@@ -1,9 +1,9 @@
-                    NO                     melhadou.xpm    
-                    WE      	           mtellami.xpm    
-                           					SO omansour.xpm   
-EA                           						profile.xpm    
+                    NO                     north.xpm    
+                    WE      	           west.xpm    
+                           					SO south.xpm   
+EA                           						east.xpm    
 
-C  255, 103, 31         
+C  135, 206, 235         
 F 4, 106,56
 
                                         11111

@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 18:33:06 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/02 11:00:52 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,6 @@ int main(int ac, char **av) {
 	mlx.img->addr = mlx_get_data_addr(mlx.img->img, &(mlx.img->bits_per_pixel),
 	                                  &mlx.img->line_lenght, &mlx.img->endian);
 	init_player(&player);
-
-
-
 
   	mlx.cube_size = TILE_SIZE;
   	mlx.player = &player;
