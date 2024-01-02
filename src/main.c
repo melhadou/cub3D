@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:08:33 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 22:54:28 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/02 19:29:48 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,24 @@ void set_player_direction(t_mlx *mlx, t_parser *data)
 		mlx->player->rotation_angle = deg2rad(90);
 }
 
+t_parser *init_parse(int ac, char **av)
+{
+	int fd;
+	char *line;
+	t_parser *data;
+
+	if (ac != 2)
+		ft_exit_error("Error : Try two arguments..");
+	data = malloc(sizeof(t_parser));
+	if (!data)
+		ft_exit_error("Error : malloc failed..");
+	filename_check_open(av[1], &fd);
+	data_initialize(&data);
+	line = "";
+	parser_brain(&data, &fd, line, av[1]);
+	return (0);
+}
+
 int main(int ac, char **av) {
 
   t_mlx mlx;
@@ -94,16 +112,17 @@ int main(int ac, char **av) {
 	t_parser *data;
 	char *line;
 	
-	if (ac != 2)
-		return (ft_exit_error("Error : Try two arguments.."), 1);
-	data = malloc(sizeof(t_parser));
-	if (!data)
-		return (ft_exit_error("Error : malloc failed.."), 1);
-	filename_check_open(av[1], &fd);
-	data_initialize(&data);
-	line = "";
-	parser_brain(&data, &fd, line, av[1]);
-	mlx.img = malloc(sizeof(t_data));
+	// if (ac != 2)
+	// 	return (ft_exit_error("Error : Try two arguments.."), 1);
+	// data = malloc(sizeof(t_parser));
+	// if (!data)
+	// 	return (ft_exit_error("Error : malloc failed.."), 1);
+	// filename_check_open(av[1], &fd);
+	// data_initialize(&data);
+	// line = "";
+	// parser_brain(&data, &fd, line, av[1]);
+	// mlx.img = malloc(sizeof(t_data));
+	
 	if (!mlx.img)
 	  exit(1);
 	
@@ -131,14 +150,13 @@ int main(int ac, char **av) {
 	render_3d_walls(&mlx);
 
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
-	// mlx_mouse_hook(mlx.win, mouse_move, &mlx);
 	mlx_hook(mlx.win, 6, 64, &mouse_move, &mlx);
 	mlx_hook(mlx.win, 2, MLX_MASK, &key_press, &mlx);
 	mlx_hook(mlx.win, 3, (1L<<1), &key_relase, &mlx);
 	mlx_hook(mlx.win, 17, MLX_MASK, &destroy_win, &mlx);
   
+	mlx_loop(mlx.mlx);
 	// ft_free(data->map);
 	// free(data);
-	mlx_loop(mlx.mlx);
   return (EXIT_SUCCESS);
 }

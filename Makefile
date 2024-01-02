@@ -1,5 +1,5 @@
 NAME = cub3d
-CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -g3 -fsanitize=address
 MAKE = make
 
 # ********************** Checking OS **********************
@@ -12,10 +12,15 @@ else #Linux and others...
 endif
 
 # ********************** Colors **********************
-BRED=\033[1;31m
-BCYAN=\033[1;36m
-BYELLOW=\033[1;33m
-NC=\033[0m
+BRED="\033[132m"
+BCYAN="\033[136m"
+BYELLOW="\033[133m"
+NC="\033[0m"
+# BOLD="\033[1m"
+# RESET="\033[0m"
+# LIGHT_RED="\033[91m"
+# LIGHT_GREEN="\033[92m"
+# LIGHT_CYAN="\033[96m"
 
 # ********************** Library's folders **********************
 LIBS = libs
@@ -52,7 +57,7 @@ OBJ = $(FILES:.c=.o)
 
 # ********************** Making RULES **********************
 all: gnl libft mlx $(NAME)
-	@echo "${YELLOW}Cub3D is ready to play${NC}"
+	@echo "${YELLOW}Cub3d is ready."
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS_A) $(LFLAGS) -o $(NAME)
