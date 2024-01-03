@@ -6,12 +6,11 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:28:55 by melhadou          #+#    #+#             */
-/*   Updated: 2023/12/30 12:26:18 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/03 00:39:59 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -25,18 +24,18 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void draw_cube(t_mlx *mlx, int x, int y, int color)
+void	draw_cube(t_mlx *mlx, int x, int y, int color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	x *= mlx->cube_size;
 	y *= mlx->cube_size;
-	
 	i = y;
-	while(i < y + mlx->cube_size){
+	while (i < y + mlx->cube_size)
+	{
 		j = x;
-		while(j < x + mlx->cube_size)
+		while (j < x + mlx->cube_size)
 		{
 			my_mlx_pixel_put(mlx->img, j, i, color);
 			j++;
@@ -45,10 +44,10 @@ void draw_cube(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-void draw_map(t_mlx *mlx)
+void	draw_map(t_mlx *mlx)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < mlx->map_height)
@@ -68,17 +67,19 @@ void draw_map(t_mlx *mlx)
 
 void	draw_player(t_mlx *mlx)
 {
-	int x = mlx->player->x;
-	int y = mlx->player->y;
-	int i;
-	int j;
+	int	x;
+	int	y;
+	int	i;
+	int	j;
 
+	x = mlx->player->x;
+	y = mlx->player->y;
 	i = x;
-	while(i < x + 5){
+	while (i < x + 5)
+	{
 		j = y;
-		while(j < y + 5)
+		while (j < y + 5)
 		{
-			// mlx_pixel_put(mlx->mlx, mlx->win, i, j, 0x0000FF);
 			my_mlx_pixel_put(mlx->img, i, j, 0x0000FF);
 			j++;
 		}

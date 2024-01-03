@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 12:01:35 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 18:25:58 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:10:03 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,4 @@ void	draw_floor(t_mlx *mlx, double wall_strip_height, double lineo, int r)
 	i = wall_strip_height + lineo - 1;
 	while (++i < WINDOW_HEIGHT)
 		my_mlx_pixel_put(mlx->img, r, i, mlx->fl_color);
-}
-
-void	draw_ceilling(t_mlx *mlx, double lineo, int r)
-{
-	int	i;
-
-	i = -1;
-	while (++i < lineo)
-		my_mlx_pixel_put(mlx->img, r, i, mlx->ceil_color);
-}
-
-int	rgb_to_hex(int rgb[3])
-{
-	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }

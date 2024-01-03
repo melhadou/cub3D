@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 00:56:16 by yoelansa          #+#    #+#             */
-/*   Updated: 2023/12/29 17:54:29 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/03 01:25:37 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdio.h>
 # include <fcntl.h>
-#include "../libs/libft/libft.h"
-#include "../libs/getnextline/get_next_line.h"
+# include "../libs/libft/libft.h"
+# include "../libs/getnextline/get_next_line.h"
 
 typedef struct s_parser
 {

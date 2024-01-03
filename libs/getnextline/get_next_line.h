@@ -6,7 +6,7 @@
 /*   By: mohamed <melhadou@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:38:03 by mohamed           #+#    #+#             */
-/*   Updated: 2023/12/26 15:09:13 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:41:43 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stddef.h>
 # include <fcntl.h>
 # include <stdlib.h>
+// # include "../libft/libft.h"
 
 char	*ft_free(char **str);
 char	*get_next_line(int fd);
