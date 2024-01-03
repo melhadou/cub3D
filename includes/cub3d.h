@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/01 22:17:27 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:55:57 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 enum {
 	ESC = 65307,
 	MLX_MASK = (1L<<0),
+	MLX_MOUSE = (1L<<1),
 	LEFT_KEY = 65361,
 	RIGHT_KEY = 65363,
 	W_KEY = 119,
@@ -204,7 +205,7 @@ char	*drawing_formula_y(t_mlx *mlx, double lineh, int i, int r);
 double angle_normalize(double angle);
 int is_wall(double x, double y, t_mlx *mlx);
 void cast_rays(t_mlx *mlx);
-double distanceBetweenPoints(t_player p1, t_player p2);
+double dis_bitween_2_pts(t_player p1, t_player p2);
 void render_3d_walls(t_mlx *mlx);
 void set_corr_values(t_mlx *mlx, int i);
 void get_direction(t_mlx *mlx, int i, double ray_angle);
@@ -221,6 +222,11 @@ void arrow_keys(t_mlx *mlx, int key);
 void movments_keys(t_mlx *mlx, int key);
 int mouse_move(int x, int y, t_mlx *mlx);
 
-// main
+/* ****************** General Helper Functions ****************** */
 void set_player_direction(t_mlx *mlx, t_parser *data);
+t_parser *init_parse(int ac, char **av);
+void core_game(t_mlx *mlx,t_player *player ,t_parser *data, t_ray *rays);
+void init_player(t_player *player);
+void init_mlx_img(t_mlx *mlx);
+
 #endif

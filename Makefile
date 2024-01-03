@@ -42,10 +42,10 @@ SRC = src/
 SRC_FILES= main.c
 
 UTILS = $(SRC)utils/
-UTILS_FILES= math_utils.c helpers.c
+UTILS_FILES= math_utils.c helpers.c render_utils.c render_helpers.c
 
 REDNRING = $(UTILS)rendring/
-REDNRING_FILES= mlx_utils.c events.c dda.c  raycasting.c
+REDNRING_FILES= mlx_utils.c events.c dda.c  raycasting.c  events_utils.c
 
 FILES = $(addprefix $(SRC), $(SRC_FILES))
 FILES += $(addprefix $(UTILS), $(UTILS_FILES))
