@@ -1,5 +1,5 @@
 NAME = cub3d
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 MAKE = make
 
 # ********************** Checking OS **********************
@@ -8,8 +8,8 @@ ifeq ($(UNAME), Darwin) # iMac / iOS
 	LFLAGS += -framework OpenGL -framework AppKit
 else #Linux and others...
 	CC = @cc
-	# LFLAGS += -lbsd -lXext -lX11 -lm
-	LFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lz -lX11 -lm
+	LFLAGS += -lbsd -lXext -lX11 -lm
+#	LFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lz -lX11 -lm
 endif
 
 # ********************** Colors **********************
@@ -27,12 +27,12 @@ NC="\033[0m"
 LIBS = libs
 LIBFT = $(LIBS)/libft
 GNL = $(LIBS)/getnextline
-# MLX = $(LIBS)/mlx
+MLX = $(LIBS)/mlx
 
 # ********************** Library's **********************
 INCLUDES = -Iincludes 
 LIBS_A = $(addprefix $(LIBFT), /libft.a)
-# LIBS_A += $(addprefix $(MLX), /libmlx.a) 
+LIBS_A += $(addprefix $(MLX), /libmlx.a) 
 LIBS_A += $(addprefix $(GNL), /gnl.a)
 
 # ********************** Project Files **********************

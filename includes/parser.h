@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 00:56:16 by yoelansa          #+#    #+#             */
-/*   Updated: 2024/01/03 01:25:37 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:51:24 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**get_rgb(char *line);
 void	ft_exit_error(char *str);
 int		is_space(char c);
 int		char_counter(char *str, char c);
-// void	ft_free(char **str);
+void	parser_free(char **str);
 int		cl_s(char *str);
 
 // data_checks.c

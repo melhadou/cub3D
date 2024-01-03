@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melhadou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:10:52 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 00:58:39 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:56:13 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,7 @@ void	core_3d_rendrer(t_mlx *mlx, int i, double wall_strip_height)
 {
 	double	var;
 	double	lineo;
-	int		side;
 
-	if (mlx->rays[i].found_horz_wall_hit)
-	{
-		if (mlx->rays[i].rayfacing_down)
-			side = 2;
-		else
-			side = 1;
-	}
-	if (mlx->rays[i].found_vert_wall_hit)
-	{
-		if (mlx->rays[i].rayfacing_left)
-			side = 4;
-		else
-			side = 3;
-	}
 	var = wall_strip_height;
 	if (var > WINDOW_HEIGHT)
 		var = WINDOW_HEIGHT;
@@ -93,8 +78,6 @@ void	core_3d_rendrer(t_mlx *mlx, int i, double wall_strip_height)
 
 void	render_3d_walls(t_mlx *mlx)
 {
-	double	ray_distance;
-	double	dist_project_plane;
 	double	wall_strip_height;
 	int		i;
 
@@ -106,7 +89,27 @@ void	render_3d_walls(t_mlx *mlx)
 		i++;
 	}
 }
+//////THIS COMMENT BELONG TO core_3d_render() FUNCTION "just in case"
+	// int		side;
 
+	// if (mlx->rays[i].found_horz_wall_hit)
+	// {
+	// 	if (mlx->rays[i].rayfacing_down)
+	// 		side = 2;
+	// 	else
+	// 		side = 1;
+	// }
+	// if (mlx->rays[i].found_vert_wall_hit)
+	// {
+	// 	if (mlx->rays[i].rayfacing_left)
+	// 		side = 4;
+	// 	else
+	// 		side = 3;
+	// }
+//---------------------
+//and thiis to render_3d_walls()
+	// double	ray_distance;
+	// double	dist_project_plane;
 /*
 // ray_distance = mlx->rays[i].distance;
 // dist_project_plane =

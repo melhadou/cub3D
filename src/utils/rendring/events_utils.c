@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melhadou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:09:16 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 00:37:25 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:44:46 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	update_movment_sides(t_mlx *mlx, int side)
 
 int	mouse_move(int x, int y, t_mlx *mlx)
 {
+	(void)y;
 	if (x < mlx->mouse_x)
 		arrow_keys(mlx, LEFT_ARROW);
 	else if (x > mlx->mouse_x)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 09:17:29 by yoelansa          #+#    #+#             */
-/*   Updated: 2023/12/26 15:04:11 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:48:18 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int	get_colors(t_parser	**data, char *line, int k)
 	if (i != 3)
 		return (ft_exit_error
 			("Error : Color must be in 3 exact numbers (RGB format)!"), 1);
-	return (ft_free(rgb), 0);
+	return (parser_free(rgb), 0);
 }

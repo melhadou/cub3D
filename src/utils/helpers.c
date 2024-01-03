@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:15:43 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 01:02:45 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:56:25 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	out_of_border(double x, double y, t_mlx *mlx)
 
 	x1 = floor(x / TILE_SIZE);
 	y1 = floor(y / TILE_SIZE);
-	if (y1 >= arr_len(mlx->map) || x1 >= ft_strlen(mlx->map[y1]))
+	if ((size_t)y1 >= arr_len(mlx->map)
+		|| (size_t)x1 >= ft_strlen(mlx->map[y1]))
 		return (1);
 	return (0);
 }

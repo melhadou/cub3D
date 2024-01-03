@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:12:43 by yoelansa          #+#    #+#             */
-/*   Updated: 2024/01/03 00:43:11 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:47:53 by uns-35           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	char_counter(char *str, char c)
 	return (j);
 }
 
-// void	ft_free(char **str)
-// {
-// 	int	i;
+void	parser_free(char **str)
+{
+	int	i;
 
-// 	i = -1;
-// 	while (str[++i])
-// 		free(str[i]);
-// 	free(str);
-// }
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+}
 
 int	cl_s(char *str)
 {
