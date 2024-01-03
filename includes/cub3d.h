@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 22:54:54 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 23:16:08 by yoelansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@
 # define NB_RAYS WINDOW_WIDTH
 # define MAX_NB 100000000
 # define SPEED 5
-
-/*
-enum
-{
-	ESC = 65307,
-	MLX_MASK = (1L<<0),
-	MLX_MOUSE = (1L<<1),
-	LEFT_KEY = 65361,
-	RIGHT_KEY = 65363,
-	W_KEY = 119,
-	S_KEY = 115,
-	A_KEY = 97,
-	D_KEY = 100,
-	RIGHT_ARROW = 65363,
-	LEFT_ARROW = 65361,
-};
-*/
 
 enum
 {
@@ -178,7 +161,6 @@ typedef struct t_mlx
 t_parser	*init_parse(int ac, char **av);
 double		deg2rad(double deg);
 double		rad2deg(double rad);
-
 void		draw_cube(t_mlx *mlx, int x, int y, int color);
 void		draw_map(t_mlx *mlx);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -192,8 +174,6 @@ void		update_movment(t_mlx *mlx);
 void		update_movment_sides(t_mlx *mlx, int side);
 
 /* ****************** DDA Util_Functions ****************** */
-// void	dda(t_mlx mlx, t_player start, t_player end);
-// void	dda(t_mlx mlx, t_player start, t_player end, double wall_height);
 void		draw_textures(t_mlx *mlx, double lineh, int r, double y1);
 void		draw_floor(t_mlx *mlx, double wsh, double lineo, int r);
 void		draw_ceilling(t_mlx *mlx, double lineo, int r);
@@ -216,7 +196,6 @@ t_ray		*vertical_intersection(t_mlx *mlx, int i);
 t_ray		*horizontal_intersection(t_mlx *mlx, int i);
 void		core_vertical(t_mlx *mlx, t_cast core, t_ray *ray, int i);
 void		core_horizontal(t_mlx *mlx, t_cast core, t_ray *ray, int i);
-
 void		update_image(t_mlx *mlx);
 void		arrow_keys(t_mlx *mlx, int key);
 void		movments_keys(t_mlx *mlx, int key);

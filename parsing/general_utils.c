@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelansa <yoelansa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:12:43 by yoelansa          #+#    #+#             */
-/*   Updated: 2024/01/03 14:47:53 by uns-35           ###   ########.fr       */
+/*   Updated: 2024/01/03 23:22:15 by yoelansa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	parser_free(char **str)
 	free(str);
 }
 
-int	cl_s(char *str)
+int	cl_s(char *str) // stands for clear spaces
 {
 	int	i;
 
