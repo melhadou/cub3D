@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 22:40:46 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:54:54 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,20 @@ enum
 	LEFT_ARROW = 65361,
 };
 */
-enum {
+
+enum
+{
 	ESC = 53,
 	MLX_MOUSE = 1,
 	MLX_MASK = 0,
- 	LEFT_KEY = 123,
- 	RIGHT_KEY = 124,
+	LEFT_KEY = 123,
+	RIGHT_KEY = 124,
 	W_KEY = 13,
 	S_KEY = 1,
 	A_KEY = 0,
 	D_KEY = 2,
- 	LEFT_ARROW = 123,
- 	RIGHT_ARROW = 124,
+	LEFT_ARROW = 123,
+	RIGHT_ARROW = 124,
 };
 
 typedef struct t_cast

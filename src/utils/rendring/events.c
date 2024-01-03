@@ -15,7 +15,7 @@
 int	key_press(int key, t_mlx *mlx)
 {
 	if (key == ESC)
-		exit(1);
+		exit(0);
 	movments_keys(mlx, key);
 	arrow_keys(mlx, key);
 	update_image(mlx);

@@ -80,6 +80,6 @@ int	mouse_move(int x, int y, t_mlx *mlx)
 
 int	destroy_win(void)
 {
-	exit(1);
+	exit(0);
 	return (0);
 }

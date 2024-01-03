@@ -1,8 +1,7 @@
 NAME = cub3d
-CFLAGS = #-Wall -Werror -Wextra -g3 -fsanitize=address
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 MAKE = make
-LFLAGS +=  -lmlx -framework OpenGL -framework AppKit
+LFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 # ********************** Colors **********************
 BRED=\033[132m
@@ -70,26 +69,19 @@ libft_clean:
 libft_fclean:
 	@cd $(LIBFT) && $(MAKE) fclean
 
-# mlx_clean:
-# 	@cd $(MLX) && $(MAKE) clean
-
 gnl_fclean:
 	@cd $(GNL) && $(MAKE) fclean
 
 gnl_clean:
 	@cd $(LIBFT) && $(MAKE) clean
 
-# clean: mlx_clean libft_clean gnl_clean
-# 	rm -f $(OBJ)
-
 clean:  libft_clean gnl_clean
 	rm -f $(OBJ)
 
-# fclean: clean mlx_clean libft_fclean gnl_fclean
-# 	@rm -f $(NAME)
+
 
 fclean: clean  libft_fclean gnl_fclean
 	@rm -f $(NAME)
 
-# .PHONY: all clean fclean re libft mlx libft_clean mlx_clean libft_fclean gnl_clean gnl_fclean
+
 .PHONY: all clean fclean re libft  libft_clean  libft_fclean gnl_clean gnl_fclean
