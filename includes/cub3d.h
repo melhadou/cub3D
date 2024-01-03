@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 01:41:25 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:40:46 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MAX_NB 100000000
 # define SPEED 5
 
+/*
 enum
 {
 	ESC = 65307,
@@ -39,6 +40,20 @@ enum
 	D_KEY = 100,
 	RIGHT_ARROW = 65363,
 	LEFT_ARROW = 65361,
+};
+*/
+enum {
+	ESC = 53,
+	MLX_MOUSE = 1,
+	MLX_MASK = 0,
+ 	LEFT_KEY = 123,
+ 	RIGHT_KEY = 124,
+	W_KEY = 13,
+	S_KEY = 1,
+	A_KEY = 0,
+	D_KEY = 2,
+ 	LEFT_ARROW = 123,
+ 	RIGHT_ARROW = 124,
 };
 
 typedef struct t_cast
