@@ -6,7 +6,7 @@
 /*   By: uns-35 <uns-35@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:42:49 by melhadou          #+#    #+#             */
-/*   Updated: 2024/01/03 00:55:57 by melhadou         ###   ########.fr       */
+/*   Updated: 2024/01/03 01:07:37 by melhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 
 // check for linux or mac
 #ifdef __linux__
-#include "../libs/mlx/mlx.h"
+// #include "../libs/mlx/mlx.h"
+#include "mlx.h"
 
 enum {
 	ESC = 65307,

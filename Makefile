@@ -8,7 +8,8 @@ ifeq ($(UNAME), Darwin) # iMac / iOS
 	LFLAGS += -framework OpenGL -framework AppKit
 else #Linux and others...
 	CC = @cc
-	LFLAGS += -lbsd -lXext -lX11 -lm
+	# LFLAGS += -lbsd -lXext -lX11 -lm
+	LFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lz -lX11 -lm
 endif
 
 # ********************** Colors **********************
@@ -26,11 +27,12 @@ NC="\033[0m"
 LIBS = libs
 LIBFT = $(LIBS)/libft
 GNL = $(LIBS)/getnextline
-MLX = $(LIBS)/mlx
+# MLX = $(LIBS)/mlx
 
 # ********************** Library's **********************
 INCLUDES = -Iincludes 
-LIBS_A = $(addprefix $(MLX), /libmlx.a) $(addprefix $(LIBFT), /libft.a)
+LIBS_A = $(addprefix $(LIBFT), /libft.a)
+# LIBS_A += $(addprefix $(MLX), /libmlx.a) 
 LIBS_A += $(addprefix $(GNL), /gnl.a)
 
 # ********************** Project Files **********************
@@ -56,7 +58,7 @@ FILES += $(addprefix $(PARSING), $(PARSING_FILES))
 OBJ = $(FILES:.c=.o)
 
 # ********************** Making RULES **********************
-all: gnl libft mlx $(NAME)
+all: gnl libft $(NAME)
 	@echo "${YELLOW}Cub3d is ready."
 
 $(NAME): $(OBJ)
@@ -83,8 +85,8 @@ libft_clean:
 libft_fclean:
 	@cd $(LIBFT) && $(MAKE) fclean
 
-mlx_clean:
-	@cd $(MLX) && $(MAKE) clean
+# mlx_clean:
+# 	@cd $(MLX) && $(MAKE) clean
 
 gnl_fclean:
 	@cd $(GNL) && $(MAKE) fclean
@@ -92,10 +94,17 @@ gnl_fclean:
 gnl_clean:
 	@cd $(LIBFT) && $(MAKE) clean
 
-clean: mlx_clean libft_clean gnl_clean
+# clean: mlx_clean libft_clean gnl_clean
+# 	rm -f $(OBJ)
+
+clean:  libft_clean gnl_clean
 	rm -f $(OBJ)
 
-fclean: clean mlx_clean libft_fclean gnl_fclean
+# fclean: clean mlx_clean libft_fclean gnl_fclean
+# 	@rm -f $(NAME)
+
+fclean: clean  libft_fclean gnl_fclean
 	@rm -f $(NAME)
 
-.PHONY: all clean fclean re libft mlx libft_clean mlx_clean libft_fclean gnl_clean gnl_fclean
+# .PHONY: all clean fclean re libft mlx libft_clean mlx_clean libft_fclean gnl_clean gnl_fclean
+.PHONY: all clean fclean re libft  libft_clean  libft_fclean gnl_clean gnl_fclean
